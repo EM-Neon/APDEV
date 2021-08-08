@@ -6,7 +6,7 @@ public class SceneHandler : MonoBehaviour
 {
     public void onStart()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("LevelScene");
     }
 
     public void Exit()
@@ -16,5 +16,23 @@ public class SceneHandler : MonoBehaviour
         #else
             Application.Quit();
         #endif
+    }
+
+    public void Level1()
+    {
+        SceneManager.LoadScene("GameScene");
+    }
+    public void Level2()
+    {
+        Debug.Log("Does Not Exist");
+    }
+    public void Level3()
+    {
+        Debug.Log("Does Not Exist");
+    }
+
+    public void onShop()
+    {
+        SceneManager.LoadScene("ShopScene");
     }
 }
