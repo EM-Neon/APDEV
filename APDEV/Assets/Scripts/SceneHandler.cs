@@ -43,8 +43,6 @@ public class SceneHandler : MonoBehaviour
 
     public void MainMenu()
     {
-        Debug.Log("sdfasdfadf");
         SceneManager.LoadScene("MainMenu");
-        Debug.Log("Shit");
     }
 }
