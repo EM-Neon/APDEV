@@ -35,4 +35,16 @@ public class SceneHandler : MonoBehaviour
     {
         SceneManager.LoadScene("ShopScene");
     }
+
+    public void Options()
+    {
+        SceneManager.LoadScene("OptionScene");
+    }
+
+    public void MainMenu()
+    {
+        Debug.Log("sdfasdfadf");
+        SceneManager.LoadScene("MainMenu");
+        Debug.Log("Shit");
+    }
 }
