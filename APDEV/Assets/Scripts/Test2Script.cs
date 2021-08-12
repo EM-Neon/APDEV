@@ -5,7 +5,6 @@ using UnityEngine;
 public class Test2Script : MonoBehaviour
 {
     public GameObject spawnItem;
-    public Transform target;
     private int timer;
     private int tick;
 
@@ -15,25 +14,33 @@ public class Test2Script : MonoBehaviour
         //StartCoroutine("MyEvent");
     }
 
-    private IEnumerator MyEvent()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(1.0f);
-            GameObject spawn = GameObject.Instantiate(spawnItem, transform);
-            spawn.transform.localPosition = Vector3.zero;
-
-            Vector3 theVector = (transform.position - target.position).normalized;
-            spawn.GetComponent<Rigidbody>().velocity = new Vector3(theVector.x * -60, theVector.y * -60, theVector.z * -60);
-        }
-    }
-
+   
     // Update is called once per frame
     void Update()
     {
-        
+        foreach (Touch touch in Input.touches)
+        {
+            if(touch.phase == TouchPhase.Moved)
+            {
+                Debug.Log("Drag");
+            }
+            if (touch.phase == TouchPhase.Began)
+            {
+                GameObject spawn = GameObject.Instantiate(spawnItem, transform);
+                spawn.transform.localPosition = Vector3.zero;
 
-        if (Input.GetMouseButtonDown(0))
+                Ray screenToPointer = Camera.main.ScreenPointToRay(touch.position);
+                RaycastHit hit;
+                if (Physics.Raycast(screenToPointer, out hit, Mathf.Infinity))
+                {
+                    Vector3 theVector = (transform.position - hit.point).normalized;
+                    spawn.GetComponent<Rigidbody>().velocity = new Vector3(theVector.x * -60, theVector.y * -60, theVector.z * -60);
+                }
+            }    
+        }
+
+        
+        /*if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("Click");
             GameObject spawn = GameObject.Instantiate(spawnItem, transform);
@@ -46,7 +53,7 @@ public class Test2Script : MonoBehaviour
                 Vector3 theVector = (transform.position - hit.point).normalized;
                 spawn.GetComponent<Rigidbody>().velocity = new Vector3(theVector.x * -60, theVector.y * -60, theVector.z * -60);
             }
-        }
+        }*/
     }
 
     //first-order intercept using absolute target position
@@ -130,25 +137,5 @@ public class Test2Script : MonoBehaviour
             return false;
         }
         return true;
-    }
-
-    Vector3 Fire()
-    {
-
-        float projectileVelocity = 300;
-        float distance = Vector3.Distance(transform.position, target.position);
-        float trajectoryAngle;
-
-        Vector3 TargetCenter = FirstOrderIntercept(transform.position, Vector3.zero, projectileVelocity, target.position, target.GetComponent<Rigidbody>().velocity);
-
-
-        /*if (CalculateTrajectory(distance, projectileVelocity, out trajectoryAngle))
-        {
-            float trajectoryHeight = Mathf.Tan(trajectoryAngle * Mathf.Deg2Rad) * distance;
-            TargetCenter.y += trajectoryHeight;
-        }*/
-
-        //fire at TargetCenter
-        return TargetCenter;
-    }
+    }   
 }
