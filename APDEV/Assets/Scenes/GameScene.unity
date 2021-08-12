@@ -722,7 +722,7 @@ MonoBehaviour:
   m_Path: {fileID: 659324476}
   m_UpdateMethod: 0
   m_PositionUnits: 1
-  m_Speed: 2
+  m_Speed: 10
   m_Position: 0
 --- !u!1001 &20792221
 PrefabInstance:
@@ -12299,14 +12299,14 @@ MonoBehaviour:
   - position: {x: -67.365746, y: 0, z: 17.805744}
     tangent: {x: -11.80616, y: 0, z: -0.21766663}
     roll: 0
-  - position: {x: -77.70088, y: 0, z: -0.10364246}
-    tangent: {x: 2.323471, y: 0, z: -7.478056}
+  - position: {x: -75.994484, y: 0, z: -0.10364246}
+    tangent: {x: -1.4577713, y: 0, z: -8.55118}
     roll: 0
-  - position: {x: -77.18358, y: 0, z: -45.798664}
+  - position: {x: -74.54709, y: 0, z: -45.798664}
     tangent: {x: 8.765945, y: 0, z: -27.138813}
     roll: 0
   - position: {x: -45.487, y: 0, z: -47.25825}
-    tangent: {x: 7.59655, y: 0, z: 4.8051186}
+    tangent: {x: 7.59655, y: 0, z: 3.5473862}
     roll: 0
   - position: {x: -19.361927, y: 0, z: -48.277466}
     tangent: {x: 13.002834, y: 0, z: 0.056671143}
