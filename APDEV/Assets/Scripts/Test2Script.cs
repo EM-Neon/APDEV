@@ -5,6 +5,7 @@ using UnityEngine;
 public class Test2Script : MonoBehaviour
 {
     public GameObject spawnItem;
+    public Transform target;
 
     // Start is called before the first frame update
     void Start()
@@ -21,13 +22,16 @@ public class Test2Script : MonoBehaviour
             GameObject spawn = GameObject.Instantiate(spawnItem, transform);
             spawn.transform.localPosition = Vector3.zero;
 
-            Ray screenToPointer = Camera.main.ScreenPointToRay(Input.mousePosition);
+            /*Ray screenToPointer = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(screenToPointer, out hit, Mathf.Infinity))
             {
                 Vector3 theVector = (transform.position - hit.point).normalized;
                 spawn.GetComponent<Rigidbody>().velocity = new Vector3(theVector.x * -60, theVector.y * -60, theVector.z * -60);
-            }
+            }*/
+
+            Vector3 theVector = (transform.position - target.position).normalized;
+            spawn.GetComponent<Rigidbody>().velocity = new Vector3(theVector.x * -60, theVector.y * -60, theVector.z * -60);
         }
     }
 }
