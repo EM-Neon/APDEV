@@ -718,8 +718,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 0}
-  buy1: {fileID: 0}
-  buy2: {fileID: 0}
+  buy1: {fileID: 1536949176}
+  buy2: {fileID: 1660700600}
+  buy3: {fileID: 384706492}
 --- !u!4 &618192576
 Transform:
   m_ObjectHideFlags: 0
