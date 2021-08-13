@@ -46,4 +46,9 @@ public class PlayerStats : MonoBehaviour
         Debug.Log("Not enough money");
         return;
     }
+
+    public void ResetPoints()
+    {
+        playerScore = 0;
+    }
 }

@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     public enum EnemyType {Power, Speed, Regular};
     private readonly float[] leftOrRight = { 1, -1 };
 
+    [SerializeField] private GameObject player;
     [SerializeField] private Material[] typeColors = new Material[3];
     [SerializeField] private float[] shootSpeed = new float[3];
     [SerializeField] private float[] moveSpeed = new float[3];
@@ -26,9 +27,18 @@ public class Enemy : MonoBehaviour
     float shootDelay;
     float shootDelay2;
 
+    private IEnumerator despawn()
+    {
+        yield return new WaitForSeconds(6.0f);
+
+        GameObject.Destroy(this.gameObject);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine("despawn");
+
         int type = Random.Range(0, 3);
         myType = (EnemyType)type;
 
@@ -74,6 +84,9 @@ public class Enemy : MonoBehaviour
             this.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Image>().fillAmount -= 1.0f / shootSpeed[(int)myType] * Time.deltaTime;
             if(shootTick >= shootDelay + shootSpeed[(int)myType])
             {
+                player = GameObject.FindGameObjectWithTag("Player");
+                player.GetComponent<Player>().hp--;
+
                 this.transform.GetChild(0).gameObject.SetActive(false);
                 this.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Image>().fillAmount = 1;
                 if(shootTick >= shootDelay + shootSpeed[(int)myType] + shootDelay2)
