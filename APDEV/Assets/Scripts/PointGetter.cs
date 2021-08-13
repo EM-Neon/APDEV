@@ -12,6 +12,7 @@ public class PointGetter : MonoBehaviour
         player = GameObject.Find("PlayerStats").GetComponent<PlayerStats>();
 
         gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = player.playerScore + " Points";
+        gameObject.transform.GetChild(1).gameObject.GetComponent<Text>().text = player.playerScore + " Besos";
     }
 
     public void ResetPoints()
