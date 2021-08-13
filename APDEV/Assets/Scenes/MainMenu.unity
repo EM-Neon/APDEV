@@ -1511,13 +1511,13 @@ MonoBehaviour:
   armor: 1
   incrementMultiplier: 1.5
   holdStatPrice:
-  - 0
-  - 0
-  - 0
+  - 50
+  - 50
+  - 50
   holdLevel:
-  - 0
-  - 0
-  - 0
+  - 1
+  - 1
+  - 1
   manager: {fileID: 0}
 --- !u!114 &1990884553
 MonoBehaviour:

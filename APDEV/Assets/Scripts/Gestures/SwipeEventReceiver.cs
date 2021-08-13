@@ -12,9 +12,10 @@ public class SwipeEventReceiver : MonoBehaviour
     public void Start()
     {
         GestureManager.Instance.OnSwipe += onSwipe;
-        change.Add(Color.blue);
         change.Add(Color.red);
+        change.Add(Color.blue);
         change.Add(Color.yellow);
+
     }
 
     public void onSwipe(object sender, SwipeEventArgs args)
