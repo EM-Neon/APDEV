@@ -697,6 +697,7 @@ MonoBehaviour:
   - {fileID: 1027516034}
   - {fileID: 1239090415}
   - {fileID: 1860542510}
+  besosText: {fileID: 1056547328}
 --- !u!4 &618192576
 Transform:
   m_ObjectHideFlags: 0
