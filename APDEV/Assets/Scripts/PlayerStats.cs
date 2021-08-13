@@ -10,6 +10,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float incrementMultiplier = 1.5f;
     public float[] holdStatPrice = new float[3];
     public float[] holdLevel = new float[3];
+    public int playerScore = 0;
     public ButtonManager manager;
 
     public void Buy(int item, float moneyRequired)
