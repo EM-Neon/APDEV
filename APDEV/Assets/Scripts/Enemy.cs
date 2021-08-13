@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float[] moveSpeed = new float[3];
     [SerializeField] private int[] enemyHPTypes = new int[3];
     [SerializeField] public int hp;
+    [SerializeField] private UltimateBar ultimateCounter;
+    int deadEnemies = 0;
 
     float moveTick = 0;
     float moveDelay;
