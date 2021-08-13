@@ -4,10 +4,14 @@ using UnityEngine;
 
 using System;
 public class GestureManager : MonoBehaviour
-{
-    public EventHandler<TapEventArgs> OnTap;
+{   
     public static GestureManager Instance;
+
+    public EventHandler<TapEventArgs> OnTap;
+    public EventHandler<SwipeEventArgs> OnSwipe;
+
     public TapProperty _tapProperty;
+    public SwipeProperty _swipeProperty;
 
     private void Awake()
     {
@@ -31,7 +35,6 @@ public class GestureManager : MonoBehaviour
         
     }
 
-
     private void Update()
     {
         if(Input.touchCount > 0)
@@ -45,15 +48,68 @@ public class GestureManager : MonoBehaviour
             else if(trackedFinger.phase == TouchPhase.Ended)
             {
                 endPoint = trackedFinger.position;
-                if(gestureTime <= _tapProperty.tapTime && Vector2.Distance(startPoint, endPoint) < (Screen.dpi * _tapProperty.tapDistance))
+
+                if (gestureTime <= _tapProperty.tapTime && Vector2.Distance(startPoint, endPoint) < (Screen.dpi * _tapProperty.tapDistance))
                 {
                     FireTapEvent(startPoint);
+                }
+
+                else if (gestureTime <= _swipeProperty.swipeTime && Vector2.Distance(startPoint, endPoint) >= (_swipeProperty.minSwipeDistance * Screen.dpi))
+                {
+                    FireSwipeEvent();
                 }
             }
             else
             {
                 gestureTime += Time.deltaTime;
             }
+        }
+    }
+
+    private void FireSwipeEvent()
+    {
+        Ray r = Camera.main.ScreenPointToRay(startPoint);
+        RaycastHit hit = new RaycastHit();
+        GameObject hitObj = null;
+
+        if(Physics.Raycast(r, out hit, Mathf.Infinity))
+        {
+            hitObj = hit.collider.gameObject;
+        }
+        Debug.Log("Swipe");
+        Vector2 diff = startPoint - endPoint;
+
+        SwipeDirections swipeDir = SwipeDirections.RIGHT;
+
+        if(Mathf.Abs(diff.x) > Mathf.Abs(diff.y)){
+            if(diff.x <= 0)
+            {
+                Debug.Log("Right");
+                swipeDir = SwipeDirections.RIGHT;
+            }
+            else
+            {
+                Debug.Log("Left");
+                swipeDir = SwipeDirections.LEFT;
+            }
+        }
+        else
+        {
+            if (diff.y <= 0)
+            {
+                Debug.Log("Up");
+                swipeDir = SwipeDirections.UP;
+            }
+            else
+            {
+                Debug.Log("Down");
+                swipeDir = SwipeDirections.DOWN;
+            }
+        }
+        SwipeEventArgs args = new SwipeEventArgs(startPoint, swipeDir, diff, hitObj);
+        if(OnSwipe != null)
+        {
+            OnSwipe(this, args);
         }
     }
 

@@ -8,7 +8,7 @@ public class Test2Script : MonoBehaviour
     private int timer;
     private int tick;
     public HealthBar health;
-    private int total = 5;
+    public int total = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +20,7 @@ public class Test2Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (Touch touch in Input.touches)
+        /*foreach (Touch touch in Input.touches)
         {
             if (touch.phase == TouchPhase.Began)
             {
@@ -33,11 +33,11 @@ public class Test2Script : MonoBehaviour
                 {
                     Vector3 theVector = (transform.position - hit.point).normalized;
                     spawn.GetComponent<Rigidbody>().velocity = new Vector3(theVector.x * -60, theVector.y * -60, theVector.z * -60);
-                    total -= 1;
-                    health.SetHealth(total);
+                    *//*total -= 1;
+                    health.SetHealth(total);*//*
                 }
             }    
-        }
+        }*/
 
         
         /*if (Input.GetMouseButtonDown(0))
