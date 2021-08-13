@@ -220,7 +220,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnItem: {fileID: 0}
-  target: {fileID: 0}
 --- !u!1 &111159257
 GameObject:
   m_ObjectHideFlags: 0
@@ -1369,8 +1368,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyAmount: 1000
-  ballSpeed: 1
   armor: 1
+  incrementMultiplier: 1.5
+  holdStatPrice:
+  - 0
+  - 0
+  - 0
+  holdLevel:
+  - 0
+  - 0
+  - 0
+  manager: {fileID: 0}
 --- !u!114 &1990884553
 MonoBehaviour:
   m_ObjectHideFlags: 0
