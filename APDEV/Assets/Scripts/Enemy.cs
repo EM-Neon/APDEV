@@ -4,13 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
-    enum EnemyType {Power, Speed, Regular};
-    private EnemyType myType;
-    private float[] leftOrRight = { 1, -1 };
+
+    public EnemyType myType;
+    public enum EnemyType {Power, Speed, Regular};
+    private readonly float[] leftOrRight = { 1, -1 };
 
     [SerializeField] private Material[] typeColors = new Material[3];
     [SerializeField] private float[] shootSpeed = new float[3];
     [SerializeField] private float[] moveSpeed = new float[3];
+    [SerializeField] private int[] enemyHPTypes = new int[3];
+    [SerializeField] public int hp;
 
     float moveTick = 0;
     float moveDelay;
@@ -28,7 +31,8 @@ public class Enemy : MonoBehaviour
         myType = (EnemyType)type;
 
         this.transform.GetChild(1).gameObject.GetComponent<MeshRenderer>().material = typeColors[type];
-        
+        hp = enemyHPTypes[type];
+
         Debug.Log(myType);
 
         moveDelay = Random.Range(0.5f, 1.0f);
@@ -42,6 +46,11 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(hp <= 0)
+        {
+            GameObject.Destroy(this.gameObject);
+        }
+
         moveTick += Time.deltaTime;
         if (moveTick >= moveDelay)
         {
