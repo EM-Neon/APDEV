@@ -24,9 +24,6 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //StartCoroutine("MovementTimer");
-        //StartCoroutine("ShootTimer");
-
         int type = Random.Range(0, 3);
         myType = (EnemyType)type;
 
@@ -40,46 +37,6 @@ public class Enemy : MonoBehaviour
 
         shootDelay = Random.Range(0.5f, 1.0f);
         shootDelay2 = Random.Range(0.5f, 1.0f);
-    }
-    private IEnumerator MovementTimer()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(Random.Range(0.5f, 1.0f));
-
-            // move left or right
-            gameObject.GetComponent<Rigidbody>().velocity = new Vector3(leftOrRight[Random.Range(0, 2)] * (3 * moveSpeed[(int)myType]), 0, 0);
-
-            yield return new WaitForSeconds(100);
-
-            // stop moving
-
-            //gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        }
-    }
-
-    private IEnumerator ShootTimer()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(Random.Range(0.5f, 1.0f));
-
-            //start shoot timer
-            Debug.Log(gameObject.name + "is Gonna throw!");
-            this.transform.GetChild(0).gameObject.SetActive(true);
-
-            this.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Image>().fillAmount -= 1/shootSpeed[(int)myType];
-
-            yield return new WaitForSeconds(shootSpeed[(int)myType]);
-
-            //get shot
-            Debug.Log("Got shot by" + gameObject.name + "!");
-
-            this.transform.GetChild(0).gameObject.SetActive(false);
-            this.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Image>().fillAmount = 1;
-            //Cooldown
-            yield return new WaitForSeconds(Random.Range(0.5f, 1.0f));
-        }
     }
 
     // Update is called once per frame
