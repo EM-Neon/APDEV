@@ -9,7 +9,10 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        GameObject temp = GameObject.Instantiate(enemy, playerPos.transform);
-        temp.gameObject.transform.localPosition = new Vector3(0, 2, 20);
+       if (other.CompareTag("Player"))
+        {
+            GameObject temp = GameObject.Instantiate(enemy, playerPos.transform);
+            temp.gameObject.transform.localPosition = new Vector3(0, 2, 10);
+        }
     }
 }

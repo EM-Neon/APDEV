@@ -37,7 +37,7 @@ public class TapEventReceiver : MonoBehaviour
         if (Physics.Raycast(screenToPointer, out hit, Mathf.Infinity))
         {
             Vector3 theVector = (transform.position - hit.point).normalized;
-            spawn.GetComponent<Rigidbody>().velocity = new Vector3(theVector.x * -60 * ballStats.ballSpeed[ballStats.type], theVector.y * -60 * ballStats.ballSpeed[ballStats.type], theVector.z * -60 * ballStats.ballSpeed[ballStats.type]);
+            spawn.GetComponent<Rigidbody>().velocity = new Vector3(theVector.x * -30 * ballStats.ballSpeed[ballStats.type], theVector.y * -30 * ballStats.ballSpeed[ballStats.type], theVector.z * -30 * ballStats.ballSpeed[ballStats.type]);
         }
     }
 }
