@@ -34098,3 +34098,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballStrengths: 030000000100000002000000
+  ballSpeed:
+  - 1
+  - 3
+  - 2
+  type: 2
+  blueBall: {fileID: 2100000, guid: d209cd8f78be4f94db56bf715f29ccd5, type: 2}
+  redBall: {fileID: 2100000, guid: fa4634b8ae82fd6469eb3619d18b1194, type: 2}
+  yellowBall: {fileID: 2100000, guid: 4c338748bc6fbf34885a80676a4100d4, type: 2}

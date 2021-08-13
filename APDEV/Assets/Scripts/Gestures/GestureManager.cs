@@ -76,7 +76,6 @@ public class GestureManager : MonoBehaviour
         {
             hitObj = hit.collider.gameObject;
         }
-        Debug.Log("Swipe");
         Vector2 diff = startPoint - endPoint;
 
         SwipeDirections swipeDir = SwipeDirections.RIGHT;
@@ -84,12 +83,10 @@ public class GestureManager : MonoBehaviour
         if(Mathf.Abs(diff.x) > Mathf.Abs(diff.y)){
             if(diff.x <= 0)
             {
-                Debug.Log("Right");
                 swipeDir = SwipeDirections.RIGHT;
             }
             else
             {
-                Debug.Log("Left");
                 swipeDir = SwipeDirections.LEFT;
             }
         }
@@ -97,12 +94,10 @@ public class GestureManager : MonoBehaviour
         {
             if (diff.y <= 0)
             {
-                Debug.Log("Up");
                 swipeDir = SwipeDirections.UP;
             }
             else
             {
-                Debug.Log("Down");
                 swipeDir = SwipeDirections.DOWN;
             }
         }
