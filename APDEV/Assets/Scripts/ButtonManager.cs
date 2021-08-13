@@ -8,7 +8,10 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private Button[] buyButtons = new Button[3];
     public float[] prices = new float[3];
+    public float[] level = new float[3];
     public Text[] texts = new Text[3];
+    public Text[] levelText = new Text[3];
+    public Text besosText;
 
     // Start is called before the first frame update
     void Start()
@@ -19,15 +22,18 @@ public class ButtonManager : MonoBehaviour
         {
             Debug.Log(i);
             prices[i] = playerStats.holdStatPrice[i];
+            level[i] = playerStats.holdLevel[i];
+            besosText.text = $"Besos: {playerStats.moneyAmount}";
             var i2 = i;
             buyButtons[i].onClick.AddListener(delegate { playerStats.Buy(i2, prices[i2]); });
             texts[i].text = prices[i] + " Besos";
+            switch (i)
+            {
+                case 0: levelText[i].text = "Health\nLv." + level[i]; break;
+                case 1: levelText[i].text = "Duration Lv." + level[i]; break;
+                case 2: levelText[i].text = "Cooldown Lv." + level[i]; break;
+            }
         }
-
-        /*buy1.onClick.AddListener(delegate { playerStats.Buy(0, prices[0]); });
-        buy2.onClick.AddListener(delegate { playerStats.Buy(1, prices[1]); });
-        buy3.onClick.AddListener(delegate { playerStats.Buy(2, prices[2]); });*/
-
         playerStats.manager = this;
     }
 
@@ -36,6 +42,7 @@ public class ButtonManager : MonoBehaviour
         for(int i = 0; i < prices.Length; i++)
         {
             playerStats.holdStatPrice[i] = prices[i];
+            playerStats.holdLevel[i] = level[i];
         }
     }
 }

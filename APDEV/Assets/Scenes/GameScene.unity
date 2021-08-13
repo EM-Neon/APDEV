@@ -12115,7 +12115,6 @@ GameObject:
   m_Component:
   - component: {fileID: 646800118}
   - component: {fileID: 646800119}
-  - component: {fileID: 646800120}
   m_Layer: 0
   m_Name: BallSpawner
   m_TagString: Untagged
@@ -12147,19 +12146,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c5f4fd91ecf29148baf3f54370803db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnItem: {fileID: 2266926528735463908, guid: 5ca9b3aadc5c7344ba599b56b3e90909, type: 3}
---- !u!114 &646800120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 646800117}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cd61c5ba24a6c24382b0c8b772b470d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnItem: {fileID: 2266926528735463908, guid: 5ca9b3aadc5c7344ba599b56b3e90909, type: 3}
@@ -25236,7 +25222,7 @@ MonoBehaviour:
   m_Path: {fileID: 659324476}
   m_UpdateMethod: 0
   m_PositionUnits: 1
-  m_Speed: 0
+  m_Speed: 2
   m_Position: 0
 --- !u!1001 &1469801444
 PrefabInstance:

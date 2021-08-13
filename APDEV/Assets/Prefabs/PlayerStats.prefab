@@ -57,7 +57,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyAmount: 1000
-  ballSpeed: 1
   armor: 1
   incrementMultiplier: 1.5
+  holdStatPrice:
+  - 50
+  - 50
+  - 50
   manager: {fileID: 0}
