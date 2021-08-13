@@ -111,8 +111,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeColor:
   - {fileID: 2100000, guid: fa4634b8ae82fd6469eb3619d18b1194, type: 2}
-  - {fileID: 2100000, guid: d209cd8f78be4f94db56bf715f29ccd5, type: 2}
   - {fileID: 2100000, guid: 4c338748bc6fbf34885a80676a4100d4, type: 2}
+  - {fileID: 2100000, guid: d209cd8f78be4f94db56bf715f29ccd5, type: 2}
   ball: {fileID: 2266926528735463908, guid: 5ca9b3aadc5c7344ba599b56b3e90909, type: 3}
 --- !u!1 &646402209066416958
 GameObject:
