@@ -61,6 +61,7 @@ public class Enemy : MonoBehaviour
         if(hp <= 0)
         {
             GameObject.Destroy(this.gameObject);
+            player.GetComponent<PlayerStats>().playerScore++;
         }
 
         moveTick += Time.deltaTime;
