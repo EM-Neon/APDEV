@@ -29,8 +29,9 @@ public class Enemy : MonoBehaviour
 
         int type = Random.Range(0, 3);
         myType = (EnemyType)type;
-        gameObject.GetComponent<MeshRenderer>().material = typeColors[type];
 
+        this.transform.GetChild(1).gameObject.GetComponent<MeshRenderer>().material = typeColors[type];
+        
         Debug.Log(myType);
 
         moveDelay = Random.Range(0.5f, 1.0f);
