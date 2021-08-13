@@ -15,6 +15,7 @@ public class SwipeEventReceiver : MonoBehaviour
         change.Add(Color.red);
         change.Add(Color.yellow);
         change.Add(Color.blue);
+        ball.gameObject.GetComponent<MeshRenderer>().material = typeColor[2];
     }
 
     public void onSwipe(object sender, SwipeEventArgs args)

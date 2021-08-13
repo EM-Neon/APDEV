@@ -9,7 +9,8 @@ public class GestureManager : MonoBehaviour
 
     public EventHandler<TapEventArgs> OnTap;
     public EventHandler<SwipeEventArgs> OnSwipe;
-
+    public EventHandler<DragArgs> OnDrag;
+    public DragProperty _dragProperty;
     public TapProperty _tapProperty;
     public SwipeProperty _swipeProperty;
 
@@ -62,6 +63,10 @@ public class GestureManager : MonoBehaviour
             else
             {
                 gestureTime += Time.deltaTime;
+                if(gestureTime >= _dragProperty.bufferTime)
+                {
+                    FireDragEvent();
+                }
             }
         }
     }
@@ -114,6 +119,26 @@ public class GestureManager : MonoBehaviour
         {
             TapEventArgs args = new TapEventArgs(pos);
             OnTap(this, args);
+        }
+    }
+
+    private void FireDragEvent()
+    {
+        Debug.Log($"Drag: {trackedFinger.position}");
+
+        Ray r = Camera.main.ScreenPointToRay(trackedFinger.position);
+        RaycastHit hit = new RaycastHit();
+        GameObject hitObj = null;
+
+        if(Physics.Raycast(r, out hit, Mathf.Infinity))
+        {
+            hitObj = hit.collider.gameObject;
+        }
+
+        DragArgs args = new DragArgs(trackedFinger, hitObj);
+        if (OnDrag != null)
+        {
+            OnDrag(this, args);
         }
     }
 }
