@@ -7,6 +7,7 @@ public class TapEventReceiver : MonoBehaviour
     public GameObject spawnItem;
     private int timer;
     private int tick;
+    public Ball ballStats;
 
     // Start is called before the first frame update
     void Start()
@@ -29,12 +30,14 @@ public class TapEventReceiver : MonoBehaviour
     {
         GameObject spawn = GameObject.Instantiate(spawnItem, transform);
         spawn.transform.localPosition = Vector3.zero;
+        ballStats = spawn.GetComponent<Ball>();
+
         Ray screenToPointer = Camera.main.ScreenPointToRay(pos);
         RaycastHit hit;
         if (Physics.Raycast(screenToPointer, out hit, Mathf.Infinity))
         {
             Vector3 theVector = (transform.position - hit.point).normalized;
-            spawn.GetComponent<Rigidbody>().velocity = new Vector3(theVector.x * -60, theVector.y * -60, theVector.z * -60);
+            spawn.GetComponent<Rigidbody>().velocity = new Vector3(theVector.x * -60 * ballStats.ballSpeed[ballStats.type], theVector.y * -60 * ballStats.ballSpeed[ballStats.type], theVector.z * -60 * ballStats.ballSpeed[ballStats.type]);
         }
     }
 }

@@ -6,7 +6,8 @@ public class Ball : MonoBehaviour
 {
     private Enemy enemyStats;
     [SerializeField] private int[] ballStrengths = new int[3];
-    private int type;
+    [SerializeField] public float[] ballSpeed = new float[3];
+    public int type;
 
     private IEnumerator Begone()
     {
@@ -28,11 +29,14 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        enemyStats = collision.gameObject.GetComponent<Enemy>();
-        type = (int)enemyStats.myType;
+        StartCoroutine("Begone");
 
-        enemyStats.hp -= ballStrengths[type];
+        if(collision.gameObject.tag == "Enemy")
+        {
+            enemyStats = collision.gameObject.GetComponent<Enemy>();
+            type = (int)enemyStats.myType;
 
-
+            enemyStats.hp -= ballStrengths[type];
+        }
     }
 }
