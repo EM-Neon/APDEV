@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class NotificationHandler : MonoBehaviour
 {
     public Text dataText;
+    public Slider slider;
     private void BuildDefaultNotificationChannel()
     {
         string channel_id = "default";
@@ -52,9 +53,11 @@ public class NotificationHandler : MonoBehaviour
         string notif_title = "Simple Notif";
         string notif_message = "This is a simple notification";
 
-        System.DateTime fireTime = System.DateTime.Now.AddSeconds(10);
+        System.DateTime fireTime = System.DateTime.Now.AddSeconds(slider.value);
 
         AndroidNotification notif = new AndroidNotification(notif_title, notif_message, fireTime);
+
+        notif.LargeIcon = "CIVU_logo";
 
         AndroidNotificationCenter.SendNotification(notif, "default");
     }
@@ -64,11 +67,13 @@ public class NotificationHandler : MonoBehaviour
         string notif_title = "Repeat Notif";
         string notif_message = "This is a repeat notification";
 
-        System.DateTime fireTime = System.DateTime.Now.AddSeconds(10);
+        System.DateTime fireTime = System.DateTime.Now.AddSeconds(slider.value);
 
         System.TimeSpan interval = new System.TimeSpan(0, 10, 0);
 
         AndroidNotification notif = new AndroidNotification(notif_title, notif_message, fireTime, interval);
+
+        notif.LargeIcon = "CIVU_logo";
 
         AndroidNotificationCenter.SendNotification(notif, "repeat");
     }
@@ -78,10 +83,12 @@ public class NotificationHandler : MonoBehaviour
         string notif_title = "Data Notif";
         string notif_message = "This has data";
 
-        System.DateTime fireTime = System.DateTime.Now.AddSeconds(10);
+        System.DateTime fireTime = System.DateTime.Now.AddSeconds(slider.value);
 
         AndroidNotification notif = new AndroidNotification(notif_title, notif_message, fireTime);
-        notif.IntentData = "DATA NOTIFICATION";
+        notif.LargeIcon = "CIVU_logo";
+        notif.IntentData = "FIRE! FIRE!";
+        
         AndroidNotificationCenter.SendNotification(notif, "default");
     }
 

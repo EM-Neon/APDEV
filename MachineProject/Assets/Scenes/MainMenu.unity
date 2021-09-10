@@ -1428,7 +1428,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 441.429, y: 0}
+  m_SizeDelta: {x: 620.658, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2046115013
 MonoBehaviour:
@@ -1463,7 +1463,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Fire Smth
+  m_Text: Fire Regulator
 --- !u!222 &2046115014
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -42,6 +42,22 @@ public class SceneHandler : MonoBehaviour
         SceneManager.LoadScene("OptionScene");
     }
 
+    public void fromNotif(GameObject panel)
+    {
+        panel.SetActive(false);
+        SceneManager.LoadScene("OptionScene");
+    }
+
+    public void toNotif(GameObject panel)
+    {
+        panel.SetActive(true);
+    }
+
+    public void toAds(GameObject panel)
+    {
+        panel.SetActive(true);
+    }
+
     public void MainMenu()
     {
         SceneManager.LoadScene("MainMenu");
