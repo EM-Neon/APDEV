@@ -22,6 +22,7 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
 
     public void OnSwipe(SwipeEventArgs args)
     {
+        Debug.Log("Swiped");
         Vector3 dir = Vector3.zero;
         switch (args.SwipeDirection)
         {
@@ -30,6 +31,7 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
             case SwipeDirections.LEFT: Debug.Log("Swiped Left"); break;
             case SwipeDirections.RIGHT: Debug.Log("Swiped Right"); break;
         }
+        Debug.Log("Swiped After");
     }
 
     public void OnDrag(DragEventArgs args)

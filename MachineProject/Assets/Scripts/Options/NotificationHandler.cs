@@ -52,12 +52,10 @@ public class NotificationHandler : MonoBehaviour
     {
         string notif_title = "Simple Notif";
         string notif_message = "This is a simple notification";
-
+        Debug.Log($"Slider Value: {slider.value}");
         System.DateTime fireTime = System.DateTime.Now.AddSeconds(slider.value);
 
         AndroidNotification notif = new AndroidNotification(notif_title, notif_message, fireTime);
-
-        notif.LargeIcon = "CIVU_logo";
 
         AndroidNotificationCenter.SendNotification(notif, "default");
     }
@@ -73,8 +71,6 @@ public class NotificationHandler : MonoBehaviour
 
         AndroidNotification notif = new AndroidNotification(notif_title, notif_message, fireTime, interval);
 
-        notif.LargeIcon = "CIVU_logo";
-
         AndroidNotificationCenter.SendNotification(notif, "repeat");
     }
 
@@ -86,7 +82,6 @@ public class NotificationHandler : MonoBehaviour
         System.DateTime fireTime = System.DateTime.Now.AddSeconds(slider.value);
 
         AndroidNotification notif = new AndroidNotification(notif_title, notif_message, fireTime);
-        notif.LargeIcon = "CIVU_logo";
         notif.IntentData = "FIRE! FIRE!";
         
         AndroidNotificationCenter.SendNotification(notif, "default");

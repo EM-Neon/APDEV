@@ -113,13 +113,18 @@ public class GestureManager : MonoBehaviour
 
             if (gestureTime <= _swipeProperty.swipeTime && Vector2.Distance(startPoint, endPoint) >= (_swipeProperty.minSwipeDistance * Screen.dpi))
             {
+                Debug.Log("Swipe");
                 FireSwipeEvent();
             }
         }
         else
         {
             gestureTime += Time.deltaTime;
-            FireDragEvent();
+            if(gestureTime >= _dragProperty.bufferTime)
+            {
+                FireDragEvent();
+            }
+            
         }
     }
 
@@ -160,9 +165,20 @@ public class GestureManager : MonoBehaviour
             }
         }
         gestureRegistered = true;
+
         SwipeEventArgs args = new SwipeEventArgs(startPoint, swipeDir, diff, hitObj);
+
         if(OnSwipe != null){
             OnSwipe(this, args);
+        }
+
+        if(hitObj != null)
+        {
+            ISwipped swipe = hitObj.GetComponent<ISwipped>();
+            if (swipe != null)
+            {
+                swipe.OnSwipe(args);
+            }
         }
     }
 
