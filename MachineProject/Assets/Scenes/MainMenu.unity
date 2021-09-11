@@ -219,7 +219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c5f4fd91ecf29148baf3f54370803db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnItem: {fileID: 0}
 --- !u!1 &111159257
 GameObject:
   m_ObjectHideFlags: 0
@@ -1347,6 +1346,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1990884554}
   - component: {fileID: 1990884553}
+  - component: {fileID: 1990884552}
   m_Layer: 0
   m_Name: PlayerStats
   m_TagString: Untagged
@@ -1354,6 +1354,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1990884552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990884551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c855a0484a389442b61576d449d736b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1990884553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1370,13 +1382,13 @@ MonoBehaviour:
   armor: 1
   incrementMultiplier: 1.5
   holdStatPrice:
-  - 0
-  - 0
-  - 0
+  - 50
+  - 50
+  - 50
   holdLevel:
-  - 0
-  - 0
-  - 0
+  - 1
+  - 1
+  - 1
   playerScore: 0
   manager: {fileID: 0}
 --- !u!4 &1990884554

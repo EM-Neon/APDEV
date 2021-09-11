@@ -119,6 +119,7 @@ public class GestureManager : MonoBehaviour
         else
         {
             gestureTime += Time.deltaTime;
+            FireDragEvent();
         }
     }
 
@@ -126,28 +127,43 @@ public class GestureManager : MonoBehaviour
     {
         Vector2 diff = startPoint - endPoint;
 
+        Ray r = Camera.main.ScreenPointToRay(startPoint);
+        RaycastHit hit = new RaycastHit();
+        GameObject hitObj = null;
+
+        if(Physics.Raycast(r, out hit, Mathf.Infinity))
+        {
+            hitObj = hit.collider.gameObject;
+        }
+
+        SwipeDirections swipeDir;
+
         if(Mathf.Abs(diff.x) > Mathf.Abs(diff.y)){
             if(diff.x <= 0)
             {
-               
+                swipeDir = SwipeDirections.RIGHT;
             }
             else
             {
-                
+                swipeDir = SwipeDirections.LEFT;
             }
         }
         else
         {
             if (diff.y <= 0)
             {
-                
+                swipeDir = SwipeDirections.UP;
             }
             else
             {
-                
+                swipeDir = SwipeDirections.DOWN;
             }
         }
         gestureRegistered = true;
+        SwipeEventArgs args = new SwipeEventArgs(startPoint, swipeDir, diff, hitObj);
+        if(OnSwipe != null){
+            OnSwipe(this, args);
+        }
     }
 
     private void FireDragEvent()

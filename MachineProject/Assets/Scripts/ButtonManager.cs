@@ -29,9 +29,9 @@ public class ButtonManager : MonoBehaviour
             texts[i].text = prices[i] + " Besos";
             switch (i)
             {
-                case 0: levelText[i].text = "Health\nLv." + level[i]; break;
-                case 1: levelText[i].text = "Duration Lv." + level[i]; break;
-                case 2: levelText[i].text = "Cooldown Lv." + level[i]; break;
+                case 0: levelText[i].text = "Pressure Duration Lv." + level[i]; break;
+                case 1: levelText[i].text = "Minimum Pressure Lv." + level[i]; break;
+                case 2: levelText[i].text = "Recharge Pressure Lv." + level[i]; break;
             }
         }
         playerStats.manager = this;

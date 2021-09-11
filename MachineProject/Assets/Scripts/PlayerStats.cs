@@ -29,15 +29,15 @@ public class PlayerStats : MonoBehaviour
             {
                 case 0:
                     Debug.Log("Item 1");
-                    manager.levelText[item].text = $"Health\nLv.{manager.level[item]}";
+                    manager.levelText[item].text = $"Pressure Duration Lv.{manager.level[item]}";
                     break;
                 case 1:
                     Debug.Log("Item 2");
-                    manager.levelText[item].text = $"Duration Lv.{manager.level[item]}";
+                    manager.levelText[item].text = $"Minimum Pressure Lv.{manager.level[item]}";
                     break;
                 case 2:
                     Debug.Log("Item 3");
-                    manager.levelText[item].text = $"Cooldown Lv.{manager.level[item]}";
+                    manager.levelText[item].text = $"Recharge Pressure Lv.{manager.level[item]}";
                     break;
             }
 
@@ -45,6 +45,11 @@ public class PlayerStats : MonoBehaviour
         }
         Debug.Log("Not enough money");
         return;
+    }
+
+    public void AddBesos()
+    {
+        moneyAmount += 15;
     }
 
     public void ResetPoints()

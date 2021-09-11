@@ -243,7 +243,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1832126447}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -388,7 +388,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 259415783}
         m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
-        m_MethodName: onStart
+        m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -445,7 +445,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 259415778}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5215b7582a86302409a8366b9043141e, type: 3}
+  m_Script: {fileID: 11500000, guid: 6146bc82d658b2149a6aaae4c45004ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &259415784
@@ -579,8 +579,8 @@ RectTransform:
   m_Children:
   - {fileID: 1660700599}
   - {fileID: 12709583}
-  - {fileID: 1239090414}
   - {fileID: 1275551436}
+  - {fileID: 1239090414}
   m_Father: {fileID: 741886712}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -656,6 +656,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 618192576}
+  - component: {fileID: 618192575}
   m_Layer: 0
   m_Name: ButtonManager
   m_TagString: Untagged
@@ -663,6 +664,40 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &618192575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618192574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe3e9a55bad8b9d42b85af3d46daca6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats: {fileID: 0}
+  buyButtons:
+  - {fileID: 1536949176}
+  - {fileID: 1660700600}
+  - {fileID: 1835559159}
+  prices:
+  - 50
+  - 50
+  - 50
+  level:
+  - 1
+  - 1
+  - 1
+  texts:
+  - {fileID: 1014500365}
+  - {fileID: 1275551437}
+  - {fileID: 1473176914}
+  levelText:
+  - {fileID: 1027516034}
+  - {fileID: 1239090415}
+  - {fileID: 1860542510}
+  besosText: {fileID: 1056547328}
 --- !u!4 &618192576
 Transform:
   m_ObjectHideFlags: 0
@@ -1038,7 +1073,7 @@ GameObject:
   - component: {fileID: 1014500366}
   - component: {fileID: 1014500365}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Duration Price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1140,8 +1175,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -150, y: 0}
-  m_SizeDelta: {x: 160.47101, y: 67.026}
+  m_AnchoredPosition: {x: -123.76, y: 0}
+  m_SizeDelta: {x: 212.952, y: 67.026}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1027516034
 MonoBehaviour:
@@ -1176,7 +1211,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Health
+  m_Text: 'Pressure Duration
 
     Lv. 1'
 --- !u!222 &1027516035
@@ -1219,7 +1254,7 @@ GameObject:
   - component: {fileID: 1056547329}
   - component: {fileID: 1056547328}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Besos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1655,12 +1690,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 298957894}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -150, y: 0}
-  m_SizeDelta: {x: 160.47101, y: 67.026}
+  m_AnchoredPosition: {x: -121.623, y: 0}
+  m_SizeDelta: {x: 217.224, y: 67.026}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1239090415
 MonoBehaviour:
@@ -1695,7 +1730,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Duration
+  m_Text: 'Minimum Pressure
 
     Lv. 1'
 --- !u!222 &1239090416
@@ -1719,7 +1754,7 @@ GameObject:
   - component: {fileID: 1275551437}
   - component: {fileID: 1275551439}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Minimum Price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1737,7 +1772,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 298957894}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1819,7 +1854,7 @@ GameObject:
   - component: {fileID: 1473176914}
   - component: {fileID: 1473176916}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Recharge Price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1837,7 +1872,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1832126447}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1919,7 +1954,7 @@ GameObject:
   - component: {fileID: 1536949177}
   - component: {fileID: 1536949176}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Pressure Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2377,7 +2412,7 @@ GameObject:
   - component: {fileID: 1660700601}
   - component: {fileID: 1660700600}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Minimum Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2516,8 +2551,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1835559158}
-  - {fileID: 1473176913}
   - {fileID: 17832110}
+  - {fileID: 1473176913}
   - {fileID: 1860542509}
   m_Father: {fileID: 741886712}
   m_RootOrder: 2
@@ -2598,7 +2633,7 @@ GameObject:
   - component: {fileID: 1835559160}
   - component: {fileID: 1835559159}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Recharge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2740,8 +2775,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -150, y: 0}
-  m_SizeDelta: {x: 160.47101, y: 67.026}
+  m_AnchoredPosition: {x: -120.106, y: 0}
+  m_SizeDelta: {x: 220.26, y: 67.026}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1860542510
 MonoBehaviour:
@@ -2776,7 +2811,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Cooldown
+  m_Text: 'Recharge Pressure
 
     Lv. 1'
 --- !u!222 &1860542511
