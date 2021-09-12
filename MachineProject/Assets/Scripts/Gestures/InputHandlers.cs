@@ -9,13 +9,18 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
     [SerializeField] private GameObject image;
     [SerializeField] private Material[] typeColor = new Material[3];
     [SerializeField] private ParticleSystem particle;
+    
     private List<Color> change = new List<Color>();
     private Color holder;
-    /*public float speed = 10;*/
     public float resizeSpeed = 5;
     public float rotateSpeed = 1;
+
+    public float time = 0.0f;
+
     private Vector3 TargetPos = Vector3.zero;
     ParticleSystem.MainModule beamParticle;
+    ParticleSystem.ShapeModule beamShape;
+
     /*private void OnEnable()
     {
         TargetPos = transform.position;
@@ -25,18 +30,27 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
     {
         GestureManager.Instance.OnSwipe += OnSwipe;
         GestureManager.Instance.OnDrag += OnDrag;
-        beamParticle = particle.main;
+        beamParticle = particle.main; // utilizes the main module of the particle system
+        beamShape = particle.shape; // utilizes the shape module and its attributes of the particle system
         change.Add(Color.red);
         change.Add(Color.yellow);
         change.Add(Color.blue);
         beam.gameObject.GetComponent<MeshRenderer>().material = typeColor[2];
         beamParticle.startColor = change[2];
         holder = image.GetComponent<Image>().color;
+        particle.Stop();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        
+        if (!GestureManager.Instance.isDrag)
+        {
+            if (particle.isPlaying)
+            {
+                particle.Stop();
+            }                
+            onReload();
+        }
     }
 
     public void OnSwipe(object sender, SwipeEventArgs args)
@@ -90,14 +104,56 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
 
     public void OnDrag(object sender, DragEventArgs args)
     {
-        if(args.HitObject == gameObject)
-        {
-            Ray r = Camera.main.ScreenPointToRay(args.TargetFinger.position);
-            Vector3 worldPoint = r.GetPoint(10);
 
-            TargetPos = worldPoint;
-            transform.position = worldPoint;
-        }   
+        Ray r = Camera.main.ScreenPointToRay(args.TargetFinger.position);
+        RaycastHit hit = new RaycastHit();
+
+        /*Vector3 worldPoint = r.GetPoint(10);
+
+        TargetPos = worldPoint;
+        transform.position = worldPoint;*/
+
+        if (Physics.Raycast(r, out hit, Mathf.Infinity))
+        {
+            Vector3 theVector = (transform.position - hit.point).normalized;
+            particle.transform.LookAt(theVector);
+        }
+
+
+        // should move particle but it no work
+
+        /*particle.transform.position = Camera.main.ScreenToWorldPoint(args.TargetFinger.position) + (Camera.main.transform.forward * 5);*/
+        /*beam.transform.position = Camera.main.ScreenToWorldPoint(args.TargetFinger.position) + (Camera.main.transform.forward * 5);*/
+        /*Debug.Log($"Position: {args.TargetFinger.position}");*/
+        if (particle.isStopped)
+        {
+            particle.Play();
+        }
+        if (particle.isPlaying)
+        {
+            if(beamParticle.startSpeedMultiplier > 0)
+            {
+                beamParticle.startSpeedMultiplier -= .01f;
+            }
+            if( beamParticle.startSpeedMultiplier <= 0)
+            {
+                beamParticle.startSpeedMultiplier = 0;
+            }
+        }
+
+        
+    }
+
+    public void onReload()
+    {
+        if (beamParticle.startSpeedMultiplier < 20)
+        {
+            beamParticle.startSpeedMultiplier += 0.5f;
+        }
+        if(beamParticle.startSpeedMultiplier >= 20)
+        {
+            beamParticle.startSpeedMultiplier = 20;
+        }
     }
 
     public void OnSpread(SpreadEventArgs args)

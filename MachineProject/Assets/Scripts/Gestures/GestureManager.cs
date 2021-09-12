@@ -36,7 +36,7 @@ public class GestureManager : MonoBehaviour
     private Vector2 endPoint = Vector2.zero;
     private float gestureTime = 0f;
     private bool gestureRegistered = false;
-
+    public bool isDrag = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -85,6 +85,7 @@ public class GestureManager : MonoBehaviour
         else
         {
             gestureRegistered = false;
+            isDrag = false;
         }
     }
 
@@ -183,8 +184,7 @@ public class GestureManager : MonoBehaviour
 
     private void FireDragEvent()
     {
-        Debug.Log($"Drag: {trackedFinger.position}");
-
+        /*Debug.Log($"Drag: {trackedFinger.position}");*/
         Ray r = Camera.main.ScreenPointToRay(trackedFinger.position);
         RaycastHit hit = new RaycastHit();
         GameObject hitObj = null;
@@ -194,12 +194,15 @@ public class GestureManager : MonoBehaviour
             hitObj = hit.collider.gameObject;
         }
 
+        isDrag = true;
+
         DragEventArgs args = new DragEventArgs(trackedFinger, hitObj);
 
         if(OnDrag != null)
         {
             OnDrag(this, args);
         }
+
         if(hitObj != null)
         {
             IDragged drag = hitObj.GetComponent<IDragged>();
