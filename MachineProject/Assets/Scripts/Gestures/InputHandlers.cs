@@ -8,13 +8,14 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
     [SerializeField] private GameObject beam;
     [SerializeField] private GameObject image;
     [SerializeField] private Material[] typeColor = new Material[3];
+    [SerializeField] private ParticleSystem particle;
     private List<Color> change = new List<Color>();
     private Color holder;
     /*public float speed = 10;*/
     public float resizeSpeed = 5;
     public float rotateSpeed = 1;
     private Vector3 TargetPos = Vector3.zero;
-
+    ParticleSystem.MainModule beamParticle;
     /*private void OnEnable()
     {
         TargetPos = transform.position;
@@ -24,11 +25,12 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
     {
         GestureManager.Instance.OnSwipe += OnSwipe;
         GestureManager.Instance.OnDrag += OnDrag;
+        beamParticle = particle.main;
         change.Add(Color.red);
         change.Add(Color.yellow);
         change.Add(Color.blue);
-        Debug.Log($"Color List {change[0]}");
         beam.gameObject.GetComponent<MeshRenderer>().material = typeColor[2];
+        beamParticle.startColor = change[2];
         holder = image.GetComponent<Image>().color;
     }
 
@@ -39,7 +41,6 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
 
     public void OnSwipe(object sender, SwipeEventArgs args)
     {
-        /*Vector3 dir = Vector3.zero;*/
         if (args.SwipeDirection == SwipeDirections.UP)
         {
             Debug.Log("Swiped Up");
@@ -47,7 +48,6 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
             // if it is the same, the color changes to the next color available
             if (holder == change[0])
             {
-                /*image.color = change[1];*/
                 image.GetComponent<Image>().color = change[1];
             }
             else if (holder == change[1])
@@ -83,15 +83,9 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
             if (holder == change[i])
             {
                 beam.gameObject.GetComponent<MeshRenderer>().material = typeColor[i];
+                beamParticle.startColor = change[i];
             }
         }
-        /*switch (args.SwipeDirection)
-        {
-            case SwipeDirections.UP: Debug.Log("Swiped Up"); break;
-            case SwipeDirections.DOWN: Debug.Log("Swiped Down"); break;
-            case SwipeDirections.LEFT: Debug.Log("Swiped Left"); break;
-            case SwipeDirections.RIGHT: Debug.Log("Swiped Right"); break;
-        }*/
     }
 
     public void OnDrag(object sender, DragEventArgs args)
