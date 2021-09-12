@@ -71,15 +71,14 @@ public class GestureManager : MonoBehaviour
                     float currDistance = Vector2.Distance(trackedFinger.position, trackedFinger2.position);
                     float prevDistance = Vector2.Distance(prevPoint1, prevPoint2);
 
-                    if (Mathf.Abs(currDistance - prevDistance) >= (_spreadProperty.MinDistanceChange * Screen.dpi))
+                    /*if (Mathf.Abs(currDistance - prevDistance) >= (_spreadProperty.MinDistanceChange * Screen.dpi))
                     {
                         FireSpreadEvent(currDistance - prevDistance);
                     }
-
                     else if(angle >= _rotateProperty.minChange)
                     { 
                         FireRotateEvent(diffVector, prevDiffVector, angle);
-                    }
+                    }*/
                 }
             }
         }
@@ -177,7 +176,7 @@ public class GestureManager : MonoBehaviour
             ISwipped swipe = hitObj.GetComponent<ISwipped>();
             if (swipe != null)
             {
-                swipe.OnSwipe(args);
+                swipe.OnSwipe(this, args);
             }
         }
     }

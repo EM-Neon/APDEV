@@ -10,9 +10,14 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
     public float rotateSpeed = 1;
     private Vector3 TargetPos = Vector3.zero;
 
-    private void OnEnable()
+    /*private void OnEnable()
     {
         TargetPos = transform.position;
+    }*/
+
+    void Start()
+    {
+        GestureManager.Instance.OnSwipe += OnSwipe;
     }
 
     private void Update()
@@ -20,7 +25,7 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
         
     }
 
-    public void OnSwipe(SwipeEventArgs args)
+    public void OnSwipe(object sender, SwipeEventArgs args)
     {
         Debug.Log("Swiped");
         Vector3 dir = Vector3.zero;

@@ -52,12 +52,14 @@ public class NotificationHandler : MonoBehaviour
     {
         string notif_title = "Simple Notif";
         string notif_message = "This is a simple notification";
-        Debug.Log($"Slider Value: {slider.value}");
+
         System.DateTime fireTime = System.DateTime.Now.AddSeconds(slider.value);
 
         AndroidNotification notif = new AndroidNotification(notif_title, notif_message, fireTime);
 
+        Debug.Log("Notification");
         AndroidNotificationCenter.SendNotification(notif, "default");
+        Debug.Log($"Notification Sent {fireTime}");
     }
 
     public void SendRepeatNotif()
