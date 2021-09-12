@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IDragged
 {
-    void OnDrag(DragEventArgs args);
+    void OnDrag(object sender, DragEventArgs args);
 }

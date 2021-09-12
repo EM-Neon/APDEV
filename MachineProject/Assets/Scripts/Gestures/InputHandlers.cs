@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotated
 {
-
-    public float speed = 10;
+    [SerializeField] private GameObject beam;
+    [SerializeField] private GameObject image;
+    [SerializeField] private Material[] typeColor = new Material[3];
+    private List<Color> change = new List<Color>();
+    private Color holder;
+    /*public float speed = 10;*/
     public float resizeSpeed = 5;
     public float rotateSpeed = 1;
     private Vector3 TargetPos = Vector3.zero;
@@ -18,6 +23,13 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
     void Start()
     {
         GestureManager.Instance.OnSwipe += OnSwipe;
+        GestureManager.Instance.OnDrag += OnDrag;
+        change.Add(Color.red);
+        change.Add(Color.yellow);
+        change.Add(Color.blue);
+        Debug.Log($"Color List {change[0]}");
+        beam.gameObject.GetComponent<MeshRenderer>().material = typeColor[2];
+        holder = image.GetComponent<Image>().color;
     }
 
     private void Update()
@@ -27,19 +39,62 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
 
     public void OnSwipe(object sender, SwipeEventArgs args)
     {
-        Debug.Log("Swiped");
-        Vector3 dir = Vector3.zero;
-        switch (args.SwipeDirection)
+        /*Vector3 dir = Vector3.zero;*/
+        if (args.SwipeDirection == SwipeDirections.UP)
+        {
+            Debug.Log("Swiped Up");
+            // checks if the current color of the beam matches any of the other colors
+            // if it is the same, the color changes to the next color available
+            if (holder == change[0])
+            {
+                /*image.color = change[1];*/
+                image.GetComponent<Image>().color = change[1];
+            }
+            else if (holder == change[1])
+            {
+                image.GetComponent<Image>().color = change[2];
+            }
+            else if (holder == change[2])
+            {
+                image.GetComponent<Image>().color = change[0];
+            }
+            holder = image.GetComponent<Image>().color;
+        }
+        else if (args.SwipeDirection == SwipeDirections.DOWN)
+        {
+            Debug.Log("Swiped Down");
+            if (holder == change[0])
+            {
+                image.GetComponent<Image>().color = change[2];
+            }
+            else if (holder == change[1])
+            {
+                image.GetComponent<Image>().color = change[0];
+            }
+            else if (holder == change[2])
+            {
+                image.GetComponent<Image>().color = change[1];
+            }
+            holder = image.GetComponent<Image>().color;
+        }
+
+        for (int i = 0; i < change.Count; i++)
+        {
+            if (holder == change[i])
+            {
+                beam.gameObject.GetComponent<MeshRenderer>().material = typeColor[i];
+            }
+        }
+        /*switch (args.SwipeDirection)
         {
             case SwipeDirections.UP: Debug.Log("Swiped Up"); break;
             case SwipeDirections.DOWN: Debug.Log("Swiped Down"); break;
             case SwipeDirections.LEFT: Debug.Log("Swiped Left"); break;
             case SwipeDirections.RIGHT: Debug.Log("Swiped Right"); break;
-        }
-        Debug.Log("Swiped After");
+        }*/
     }
 
-    public void OnDrag(DragEventArgs args)
+    public void OnDrag(object sender, DragEventArgs args)
     {
         if(args.HitObject == gameObject)
         {

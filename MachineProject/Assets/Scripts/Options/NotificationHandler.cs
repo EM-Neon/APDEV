@@ -53,7 +53,7 @@ public class NotificationHandler : MonoBehaviour
         string notif_title = "Simple Notif";
         string notif_message = "This is a simple notification";
 
-        System.DateTime fireTime = System.DateTime.Now.AddSeconds(slider.value);
+        System.DateTime fireTime = System.DateTime.Now.AddSeconds(1);
 
         AndroidNotification notif = new AndroidNotification(notif_title, notif_message, fireTime);
 

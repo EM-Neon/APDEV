@@ -193,7 +193,9 @@ public class GestureManager : MonoBehaviour
         {
             hitObj = hit.collider.gameObject;
         }
+
         DragEventArgs args = new DragEventArgs(trackedFinger, hitObj);
+
         if(OnDrag != null)
         {
             OnDrag(this, args);
@@ -203,7 +205,7 @@ public class GestureManager : MonoBehaviour
             IDragged drag = hitObj.GetComponent<IDragged>();
             if(drag != null)
             {
-                drag.OnDrag(args);
+                drag.OnDrag(this, args);
             }
         }
     }
