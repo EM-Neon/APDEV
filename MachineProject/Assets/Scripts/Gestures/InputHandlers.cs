@@ -9,29 +9,26 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
     [SerializeField] private GameObject image;
     [SerializeField] private Material[] typeColor = new Material[3];
     [SerializeField] private ParticleSystem particle;
-    
+
+   public Camera camera;
+
     private List<Color> change = new List<Color>();
     private Color holder;
     public float resizeSpeed = 5;
     public float rotateSpeed = 1;
+    public float maxDistance = 1000;
 
     public float time = 0.0f;
-
+    private bool isUlt = false;
     private Vector3 TargetPos = Vector3.zero;
+    private Vector3 direction;
     ParticleSystem.MainModule beamParticle;
-    ParticleSystem.ShapeModule beamShape;
-
-    /*private void OnEnable()
-    {
-        TargetPos = transform.position;
-    }*/
 
     void Start()
     {
         GestureManager.Instance.OnSwipe += OnSwipe;
         GestureManager.Instance.OnDrag += OnDrag;
         beamParticle = particle.main; // utilizes the main module of the particle system
-        beamShape = particle.shape; // utilizes the shape module and its attributes of the particle system
         change.Add(Color.red);
         change.Add(Color.yellow);
         change.Add(Color.blue);
@@ -43,6 +40,7 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
 
     private void FixedUpdate()
     {
+        float xValue = Input.acceleration.magnitude;
         if (!GestureManager.Instance.isDrag)
         {
             if (particle.isPlaying)
@@ -50,6 +48,10 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
                 particle.Stop();
             }                
             onReload();
+        }
+        if(xValue >= 2.0f)
+        {
+            isUlt = true;
         }
     }
 
@@ -104,44 +106,57 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
 
     public void OnDrag(object sender, DragEventArgs args)
     {
-
         Ray r = Camera.main.ScreenPointToRay(args.TargetFinger.position);
         RaycastHit hit = new RaycastHit();
 
-        /*Vector3 worldPoint = r.GetPoint(10);
+        Vector3 worldPoint = r.GetPoint(10);
 
         TargetPos = worldPoint;
-        transform.position = worldPoint;*/
-
-        if (Physics.Raycast(r, out hit, Mathf.Infinity))
+        transform.position = worldPoint;
+        
+        if (Physics.Raycast(r.origin, r.direction, out hit, Mathf.Infinity))
         {
-            Vector3 theVector = (transform.position - hit.point).normalized;
-            particle.transform.LookAt(theVector);
+            Aim(gameObject, hit.point);
+        }
+        else
+        {
+            Vector3 pos = r.GetPoint(maxDistance);
+            Aim(gameObject, pos);
         }
 
-
-        // should move particle but it no work
-
-        /*particle.transform.position = Camera.main.ScreenToWorldPoint(args.TargetFinger.position) + (Camera.main.transform.forward * 5);*/
-        /*beam.transform.position = Camera.main.ScreenToWorldPoint(args.TargetFinger.position) + (Camera.main.transform.forward * 5);*/
-        /*Debug.Log($"Position: {args.TargetFinger.position}");*/
         if (particle.isStopped)
         {
             particle.Play();
         }
         if (particle.isPlaying)
         {
-            if(beamParticle.startSpeedMultiplier > 0)
+            //checks if player has ult activated
+            if (!isUlt)
             {
-                beamParticle.startSpeedMultiplier -= .01f;
+                if(beamParticle.startSpeedMultiplier > 0)
+                {
+                    beamParticle.startSpeedMultiplier -= .05f;
+                }
+                if( beamParticle.startSpeedMultiplier <= 0)
+                {
+                    beamParticle.startSpeedMultiplier = 0;
+                }
             }
-            if( beamParticle.startSpeedMultiplier <= 0)
+            else
             {
-                beamParticle.startSpeedMultiplier = 0;
+                time += Time.fixedDeltaTime;
+                beamParticle.startSpeedMultiplier = 100;
+                beamParticle.startColor = Color.white;
+                beamParticle.gravityModifier = 0;
+                if(time >= 10.0f)
+                {
+                    isUlt = false;
+                    beamParticle.startSpeedMultiplier = 20;
+                    beamParticle.gravityModifier = 1;
+                    beamParticle.startColor = holder;
+                }
             }
         }
-
-        
     }
 
     public void onReload()
@@ -154,6 +169,13 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
         {
             beamParticle.startSpeedMultiplier = 20;
         }
+    }
+
+    private void Aim(GameObject obj, Vector3 destination)
+    {
+        direction = destination - obj.transform.position;
+        Quaternion rotation = Quaternion.LookRotation(direction);
+        particle.transform.rotation = Quaternion.Lerp(particle.transform.rotation, rotation, 1);
     }
 
     public void OnSpread(SpreadEventArgs args)
