@@ -778,6 +778,7 @@ GameObject:
   - component: {fileID: 258480703}
   - component: {fileID: 258480705}
   - component: {fileID: 258480704}
+  - component: {fileID: 258480706}
   m_Layer: 5
   m_Name: Besos
   m_TagString: Untagged
@@ -846,6 +847,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 258480702}
   m_CullTransparentMesh: 1
+--- !u!114 &258480706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258480702}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aebe9f421bc449244bb45014ad91b6f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Besos: 0
+  adsManager: {fileID: 1004620965}
+  besosLabel: {fileID: 0}
 --- !u!1 &271561750
 GameObject:
   m_ObjectHideFlags: 0
@@ -3472,6 +3488,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1004620966}
   - component: {fileID: 1004620965}
+  - component: {fileID: 1004620967}
   m_Layer: 0
   m_Name: Ads Manager
   m_TagString: Untagged
@@ -3491,8 +3508,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784e3189ff4cbb74082458cbc63a9a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 0}
-  besosText: {fileID: 258480704}
 --- !u!4 &1004620966
 Transform:
   m_ObjectHideFlags: 0
@@ -3507,6 +3522,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1004620967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004620964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aebe9f421bc449244bb45014ad91b6f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Besos: 0
+  adsManager: {fileID: 1004620965}
+  besosLabel: {fileID: 258480704}
 --- !u!1 &1024667922
 GameObject:
   m_ObjectHideFlags: 0

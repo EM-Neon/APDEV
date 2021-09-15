@@ -7,13 +7,13 @@ public class AdHandler : MonoBehaviour
 {
     public int Besos = 0;//temp holder, will change this later
     public AdsManager adsManager;
-    private Text besosLabel;
+    public Text besosLabel;
     
     // Start is called before the first frame update
     void Start()
     {
         adsManager.OnAdDone += OnAdDone;
-        besosLabel = GetComponent<Text>();
+        /*besosLabel = GetComponent<Text>();*/
     }
     public void OnAdDone(object sender, AdFinishEventArgs args)
     {

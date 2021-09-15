@@ -45,7 +45,6 @@ public class SceneHandler : MonoBehaviour
     public void fromNotif(GameObject panel)
     {
         panel.SetActive(false);
-        SceneManager.LoadScene("OptionScene");
     }
 
     public void toNotif(GameObject panel)

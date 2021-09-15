@@ -6,8 +6,6 @@ using System;
 using UnityEngine.Advertisements;
 public class AdsManager : MonoBehaviour, IUnityAdsListener
 {
-    [SerializeField] private PlayerStats playerStats;
-    public Text besosText;
 
     public EventHandler<AdFinishEventArgs> OnAdDone;
     public string GameID
@@ -16,11 +14,11 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
         {
             #if UNITY_ANDROID
                      return "4293189";
-            #elif UNITY_IOS
+#elif UNITY_IOS
                     return "4293188";
-            #else
+#else
                     return "";
-            #endif
+#endif
         }
     }
 
@@ -72,9 +70,6 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     private void Start()
     {
         Advertisement.AddListener(this);
-        // for placing the correct money from the beginning
-        playerStats = GameObject.Find("PlayerStats").GetComponent<PlayerStats>();
-        besosText.text = $"Besos: {playerStats.moneyAmount}";
     }
     public void OnUnityAdsReady(string placementId)
     {
@@ -106,8 +101,6 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
         {
             AdFinishEventArgs args = new AdFinishEventArgs(placementId, showResult);
             OnAdDone(this, args);
-            //if the ad finished, it should reward
-            playerStats.AddBesos();
         }
     }
 }
