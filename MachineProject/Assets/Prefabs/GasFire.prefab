@@ -9623,6 +9623,7 @@ GameObject:
   - component: {fileID: 6551652190331049668}
   - component: {fileID: 6551652190331049671}
   - component: {fileID: 8195476882599340392}
+  - component: {fileID: 4505351104713524944}
   m_Layer: 0
   m_Name: GasFire
   m_TagString: Untagged
@@ -9942,3 +9943,19 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!54 &4505351104713524944
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6551652190331049670}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
