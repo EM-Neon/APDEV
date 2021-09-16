@@ -5,7 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.Advertisements;
 public class AdHandler : MonoBehaviour
 {
-    public int Besos = 0;//temp holder, will change this later
+    [SerializeField] private PlayerStats stats;
+    public float Besos = 0;//temp holder, will change this later
     public AdsManager adsManager;
     public Text besosLabel;
     
@@ -13,6 +14,8 @@ public class AdHandler : MonoBehaviour
     void Start()
     {
         adsManager.OnAdDone += OnAdDone;
+        stats = GameObject.Find("PlayerStats").GetComponent<PlayerStats>();
+        Besos = stats.moneyAmount;
         /*besosLabel = GetComponent<Text>();*/
     }
     public void OnAdDone(object sender, AdFinishEventArgs args)

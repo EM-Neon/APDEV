@@ -5734,7 +5734,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1855713725}
   - component: {fileID: 1855713724}
-  - component: {fileID: 1855713727}
   - component: {fileID: 1855713726}
   m_Layer: 0
   m_Name: Gesture Manager
@@ -5768,7 +5767,6 @@ MonoBehaviour:
     minDistance: 0.75
     minChange: 0.4
   isDrag: 0
-  hasUlt: 0
 --- !u!4 &1855713725
 Transform:
   m_ObjectHideFlags: 0
@@ -5807,18 +5805,6 @@ MonoBehaviour:
   rotateSpeed: 1
   maxDistance: 1000
   time: 0
---- !u!114 &1855713727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1855713723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2226a3f8653c73d46963e225e452e6ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2073693201
 GameObject:
   m_ObjectHideFlags: 0

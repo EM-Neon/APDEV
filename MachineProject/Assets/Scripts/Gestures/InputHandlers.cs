@@ -10,8 +10,6 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
     [SerializeField] private Material[] typeColor = new Material[3];
     [SerializeField] private ParticleSystem particle;
 
-   public Camera camera;
-
     private List<Color> change = new List<Color>();
     private Color holder;
     public float resizeSpeed = 5;
@@ -49,6 +47,7 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
             }                
             onReload();
         }
+        // checks accelerometer to see if ultimate is being activated
         if(xValue >= 2.0f)
         {
             isUlt = true;
@@ -154,6 +153,7 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
                     beamParticle.startSpeedMultiplier = 20;
                     beamParticle.gravityModifier = 1;
                     beamParticle.startColor = holder;
+                    time = 0;
                 }
             }
         }
