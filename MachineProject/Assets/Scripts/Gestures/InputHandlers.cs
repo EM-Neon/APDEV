@@ -19,7 +19,7 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
     public float maxDistance = 1000;
 
     public float time = 0.0f;
-    private bool isUlt = false;
+    public bool isUlt = false;
     private Vector3 TargetPos = Vector3.zero;
     private Vector3 direction;
     ParticleSystem.MainModule beamParticle;
@@ -55,7 +55,7 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
             onReload();
         }
         // checks accelerometer to see if ultimate is being activated
-        if(xValue >= 2.0f)
+        if(xValue >= 2.0f && playerStats.canUlt)
         {
             isUlt = true;
         }

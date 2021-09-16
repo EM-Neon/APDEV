@@ -9627,7 +9627,7 @@ GameObject:
   - component: {fileID: 5210443938842681791}
   m_Layer: 0
   m_Name: RegularFire
-  m_TagString: Untagged
+  m_TagString: Regular
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
