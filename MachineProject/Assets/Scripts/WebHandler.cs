@@ -6,40 +6,45 @@ using Newtonsoft.Json;
 using System.Text;
 using UnityEngine.UI;
 
+public class Profile
+{
+    public string nickname;
+    public string name;
+    public string email;
+    public string contact;
+    public string id;
+
+    public Profile(string _nickname, string _name, string _email, string _contact, string _id)
+    {
+        nickname = _nickname;
+        name = _name;
+        email = _email;
+        contact = _contact;
+        id = _id;
+    }
+}
+
 public class WebHandler : MonoBehaviour
 {
-    private Text nickname;
-    private Text playerName;
-    private Text email;
-    private Text contact;
+    [SerializeField] private InputField[] text;
+    [SerializeField] private InputField[] edit;
+    [SerializeField] private Dropdown down;
+    private List<string> options;
+    private List<Profile> profiles = new List<Profile>();
     public string BaseURL
     {
         get { return "https://my-user-scoreboard.herokuapp.com/api/"; }
     }
-    public void setNickname(InputField text)
-    {
-        nickname.text = text.text;
-    }
-    public void playerNickname(InputField text)
-    {
-        playerName.text = text.text;
-    }
-    public void setEmail(InputField text)
-    {
-        email.text = text.text;
-    }
-    public void setContact(InputField text)
-    {
-        contact.text = text.text;
-    }
+
     IEnumerator SamplePostRoutine()
     {
         Dictionary<string, string> PlayerParams = new Dictionary<string, string>();
 
-        PlayerParams.Add("nickname", nickname.text);
-        PlayerParams.Add("name", playerName.text);
-        PlayerParams.Add("email", email.text);
-        PlayerParams.Add("contact", contact.text);
+        PlayerParams.Add("nickname", text[0].text);
+        PlayerParams.Add("name", text[1].text);
+        PlayerParams.Add("email", text[2].text);
+        PlayerParams.Add("contact", text[3].text);
+
 
         string requestString = JsonConvert.SerializeObject(PlayerParams);
         byte[] requestData = new UTF8Encoding().GetBytes(requestString);
@@ -75,11 +80,17 @@ public class WebHandler : MonoBehaviour
 
         if (string.IsNullOrEmpty(request.error))
         {
+            profiles.Clear();
             Debug.Log($"Message: {request.downloadHandler.text}");
             List<Dictionary<string, string>> playerList = JsonConvert.DeserializeObject<List<Dictionary<string, string>>>(request.downloadHandler.text);
-            foreach(Dictionary<string, string> player in playerList)
+            foreach (Dictionary<string, string> player in playerList)
             {
                 Debug.Log($"Got player: {player["nickname"]}");
+                Profile profile = new Profile(player["nickname"], player["name"], player["email"], player["contact"], player["id"]);
+                profiles.Add(profile);
+                options.Add(player["nickname"]);
+                down.AddOptions(options);
+
             }
         }
         else
@@ -113,10 +124,10 @@ public class WebHandler : MonoBehaviour
     {
         Dictionary<string, string> PlayerParams = new Dictionary<string, string>();
 
-        PlayerParams.Add("nickname", "6");
-        PlayerParams.Add("name", "Shad");
-        PlayerParams.Add("email", "100");
-        PlayerParams.Add("contact", "100");
+        PlayerParams.Add("nickname", edit[0].text);
+        PlayerParams.Add("name", edit[1].text);
+        PlayerParams.Add("email", edit[2].text);
+        PlayerParams.Add("contact", edit[3].text);
 
         string requestString = JsonConvert.SerializeObject(PlayerParams);
 
@@ -147,7 +158,7 @@ public class WebHandler : MonoBehaviour
 
     IEnumerator SampleDeletePlayerRoutine()
     {
-        UnityWebRequest request = new UnityWebRequest(BaseURL + "scores/10", "DELETE");
+        UnityWebRequest request = new UnityWebRequest(BaseURL + "players", "DELETE");
 
         request.downloadHandler = new DownloadHandlerBuffer();
 
