@@ -183,7 +183,6 @@ public class GestureManager : MonoBehaviour
 
     private void FireDragEvent()
     {
-        Debug.Log($"Drag: {trackedFinger.position}");
         Ray r = Camera.main.ScreenPointToRay(trackedFinger.position);
         RaycastHit hit = new RaycastHit();
         GameObject hitObj = null;

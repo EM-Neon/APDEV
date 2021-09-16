@@ -7,7 +7,6 @@ using UnityEngine.Audio;
 public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotated
 {
     [SerializeField] private PlayerStats playerStats;
-    [SerializeField] private GameObject beam;
     [SerializeField] private GameObject image;
     [SerializeField] private Material[] typeColor = new Material[3];
     [SerializeField] private ParticleSystem particle;
@@ -34,11 +33,11 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
         GestureManager.Instance.OnSwipe += OnSwipe;
         GestureManager.Instance.OnDrag += OnDrag;
         beamParticle = particle.main; // utilizes the main module of the particle system
-        change.Add(Color.red);
-        change.Add(Color.yellow);
-        change.Add(Color.blue);
-        beam.gameObject.GetComponent<MeshRenderer>().material = typeColor[2];
+        change.Add(Color.red);  //0
+        change.Add(Color.yellow); //1
+        change.Add(Color.blue); //2
         beamParticle.startColor = change[2];
+        particle.tag = "Regular";
         holder = image.GetComponent<Image>().color;
         particle.Stop();
     }
@@ -67,37 +66,41 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
     {
         if (args.SwipeDirection == SwipeDirections.UP)
         {
-            Debug.Log("Swiped Up");
             // checks if the current color of the beam matches any of the other colors
             // if it is the same, the color changes to the next color available
             if (holder == change[0])
             {
                 image.GetComponent<Image>().color = change[1];
+                particle.tag = "Gas";
             }
             else if (holder == change[1])
             {
                 image.GetComponent<Image>().color = change[2];
+                particle.tag = "Regular";
             }
             else if (holder == change[2])
             {
                 image.GetComponent<Image>().color = change[0];
+                particle.tag = "Electric";
             }
             holder = image.GetComponent<Image>().color;
         }
         else if (args.SwipeDirection == SwipeDirections.DOWN)
         {
-            Debug.Log("Swiped Down");
             if (holder == change[0])
             {
                 image.GetComponent<Image>().color = change[2];
+                particle.tag = "Regular";
             }
             else if (holder == change[1])
             {
                 image.GetComponent<Image>().color = change[0];
+                particle.tag = "Electric";
             }
             else if (holder == change[2])
             {
                 image.GetComponent<Image>().color = change[1];
+                particle.tag = "Gas";
             }
             holder = image.GetComponent<Image>().color;
         }
@@ -106,7 +109,6 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
         {
             if (holder == change[i])
             {
-                beam.gameObject.GetComponent<MeshRenderer>().material = typeColor[i];
                 beamParticle.startColor = change[i];
             }
         }
@@ -195,7 +197,7 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
     public void checkUpgrades()
     {
         //pressure decrease upgrades
-        switch (playerStats.manager.level[0])
+        switch (playerStats.holdLevel[0])
         {
             case 2: minSpeed = 0.04f; break;
             case 3: minSpeed = 0.03f; break;
@@ -203,7 +205,8 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
             case 5: minSpeed = 0.01f; break;
             default: minSpeed = 0.05f; break;
         }
-        switch (playerStats.manager.level[1])
+        // minimum pressure
+        switch (playerStats.holdLevel[1])
         {
             case 2: minPressure = 1; break;
             case 3: minPressure = 3; break;
@@ -211,7 +214,8 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
             case 5: minPressure = 10; break;
             default: minPressure = 0; break;
         }
-        switch (playerStats.manager.level[2])
+        //recharge time
+        switch (playerStats.holdLevel[2])
         {
             case 2: rechargeTime = 0.7f; break;
             case 3: rechargeTime = 0.8f; break;
@@ -219,9 +223,6 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
             case 5: rechargeTime = 0.10f; break;
             default: rechargeTime = 0.5f; break;
         }
-        Debug.Log($"Pressure Decrease {minSpeed}");
-        Debug.Log($"Pressure Minimum {minPressure}");
-        Debug.Log($"Recharge Time {rechargeTime}");
     }
 
     public void OnSpread(SpreadEventArgs args)
