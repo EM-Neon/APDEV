@@ -15,7 +15,10 @@ public class AdHandler : MonoBehaviour
     {
         adsManager.OnAdDone += OnAdDone;
         stats = GameObject.Find("PlayerStats").GetComponent<PlayerStats>();
-        Besos = stats.moneyAmount;
+        if(stats != null)
+        {
+            Besos = stats.moneyAmount;
+        }
         /*besosLabel = GetComponent<Text>();*/
     }
     public void OnAdDone(object sender, AdFinishEventArgs args)

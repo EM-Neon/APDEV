@@ -5,39 +5,59 @@ using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
+    private static GameObject playerInstance;
     [SerializeField] public float moneyAmount = 1000;
-    [SerializeField] private int armor = 1;
     [SerializeField] private float incrementMultiplier = 1.5f;
     public float[] holdStatPrice = new float[3];
     public float[] holdLevel = new float[3];
     public int playerScore = 0;
     public ButtonManager manager;
 
-    public void Buy(int item, float moneyRequired)
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+        if(playerInstance == null)
+        {
+            playerInstance = gameObject;
+        }
+        else
+        {
+            Object.Destroy(gameObject);
+        }
+    }
+
+    public void Buy(int item, float moneyRequired, GameObject panel)
     {
         if(moneyAmount >= moneyRequired)
         {
-            Debug.Log("Buying");
+            //clamping, level does not go beyond 5
+            if(manager.level[item] + 1 <= 5)
+            {
+                moneyAmount -= moneyRequired;
 
-            moneyAmount -= moneyRequired;
+                manager.prices[item] = (int)(manager.prices[item] * incrementMultiplier);
+                manager.texts[item].text = manager.prices[item] + " Besos";
+                manager.level[item] += 1;
+                manager.besosText.text = $"Besos: {moneyAmount}";
+            }
+            else
+            {
+                panel.SetActive(true);
+            }
 
-            manager.prices[item] = (int)(manager.prices[item] * incrementMultiplier);
-            manager.texts[item].text = manager.prices[item] + " Besos";
-            manager.level[item] += 1;
-            manager.besosText.text = $"Besos: {moneyAmount}";
             switch (item)
             {
                 case 0:
                     Debug.Log("Item 1");
-                    manager.levelText[item].text = $"Pressure Duration Lv.{manager.level[item]}";
+                    manager.levelText[item].text = $"Pressure Duration Lv.{manager.level[item]}"; //decreases pressure decrease
                     break;
                 case 1:
                     Debug.Log("Item 2");
-                    manager.levelText[item].text = $"Minimum Pressure Lv.{manager.level[item]}";
+                    manager.levelText[item].text = $"Minimum Pressure Lv.{manager.level[item]}"; //increases minimum pressure
                     break;
                 case 2:
                     Debug.Log("Item 3");
-                    manager.levelText[item].text = $"Recharge Pressure Lv.{manager.level[item]}";
+                    manager.levelText[item].text = $"Recharge Pressure Lv.{manager.level[item]}"; // increases reload speed
                     break;
             }
 

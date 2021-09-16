@@ -12,7 +12,7 @@ public class ButtonManager : MonoBehaviour
     public Text[] texts = new Text[3];
     public Text[] levelText = new Text[3];
     public Text besosText;
-
+    public GameObject panel;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +25,7 @@ public class ButtonManager : MonoBehaviour
             level[i] = playerStats.holdLevel[i];
             besosText.text = $"Besos: {playerStats.moneyAmount}";
             var i2 = i;
-            buyButtons[i].onClick.AddListener(delegate { playerStats.Buy(i2, prices[i2]); });
+            buyButtons[i].onClick.AddListener(delegate { playerStats.Buy(i2, prices[i2], panel); });
             texts[i].text = prices[i] + " Besos";
             switch (i)
             {

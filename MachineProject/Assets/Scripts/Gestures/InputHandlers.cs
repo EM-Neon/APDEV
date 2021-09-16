@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotated
 {
+    [SerializeField] private PlayerStats playerStats;
     [SerializeField] private GameObject beam;
     [SerializeField] private GameObject image;
     [SerializeField] private Material[] typeColor = new Material[3];
     [SerializeField] private ParticleSystem particle;
+    [SerializeField] private AudioSource spraySFX;
 
     private List<Color> change = new List<Color>();
     private Color holder;
@@ -22,8 +25,12 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
     private Vector3 direction;
     ParticleSystem.MainModule beamParticle;
 
+    public float minPressure = 0.0f;
+    public float rechargeTime = 0.5f;
+    public float minSpeed = 0.05f;
     void Start()
     {
+        playerStats = GameObject.Find("PlayerStats").GetComponent<PlayerStats>();
         GestureManager.Instance.OnSwipe += OnSwipe;
         GestureManager.Instance.OnDrag += OnDrag;
         beamParticle = particle.main; // utilizes the main module of the particle system
@@ -39,6 +46,7 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
     private void FixedUpdate()
     {
         float xValue = Input.acceleration.magnitude;
+        checkUpgrades();
         if (!GestureManager.Instance.isDrag)
         {
             if (particle.isPlaying)
@@ -52,6 +60,7 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
         {
             isUlt = true;
         }
+        
     }
 
     public void OnSwipe(object sender, SwipeEventArgs args)
@@ -126,19 +135,20 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
         if (particle.isStopped)
         {
             particle.Play();
+            spraySFX.Play();
         }
         if (particle.isPlaying)
         {
-            //checks if player has ult activated
+            //checks if player does not have ult activated
             if (!isUlt)
             {
-                if(beamParticle.startSpeedMultiplier > 0)
+                if(beamParticle.startSpeedMultiplier > minPressure)
                 {
-                    beamParticle.startSpeedMultiplier -= .05f;
+                    beamParticle.startSpeedMultiplier -= minSpeed;
                 }
-                if( beamParticle.startSpeedMultiplier <= 0)
+                if( beamParticle.startSpeedMultiplier <= minPressure)
                 {
-                    beamParticle.startSpeedMultiplier = 0;
+                    beamParticle.startSpeedMultiplier = minPressure;
                 }
             }
             else
@@ -161,9 +171,13 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
 
     public void onReload()
     {
+        if (spraySFX.isPlaying)
+        {
+            spraySFX.Pause();
+        }
         if (beamParticle.startSpeedMultiplier < 20)
         {
-            beamParticle.startSpeedMultiplier += 0.5f;
+            beamParticle.startSpeedMultiplier += rechargeTime;
         }
         if(beamParticle.startSpeedMultiplier >= 20)
         {
@@ -176,6 +190,38 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
         direction = destination - obj.transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction);
         particle.transform.rotation = Quaternion.Lerp(particle.transform.rotation, rotation, 1);
+    }
+
+    public void checkUpgrades()
+    {
+        //pressure decrease upgrades
+        switch (playerStats.manager.level[0])
+        {
+            case 2: minSpeed = 0.04f; break;
+            case 3: minSpeed = 0.03f; break;
+            case 4: minSpeed = 0.02f; break;
+            case 5: minSpeed = 0.01f; break;
+            default: minSpeed = 0.05f; break;
+        }
+        switch (playerStats.manager.level[1])
+        {
+            case 2: minPressure = 1; break;
+            case 3: minPressure = 3; break;
+            case 4: minPressure = 5; break;
+            case 5: minPressure = 10; break;
+            default: minPressure = 0; break;
+        }
+        switch (playerStats.manager.level[2])
+        {
+            case 2: rechargeTime = 0.7f; break;
+            case 3: rechargeTime = 0.8f; break;
+            case 4: rechargeTime = 0.9f; break;
+            case 5: rechargeTime = 0.10f; break;
+            default: rechargeTime = 0.5f; break;
+        }
+        Debug.Log($"Pressure Decrease {minSpeed}");
+        Debug.Log($"Pressure Minimum {minPressure}");
+        Debug.Log($"Recharge Time {rechargeTime}");
     }
 
     public void OnSpread(SpreadEventArgs args)

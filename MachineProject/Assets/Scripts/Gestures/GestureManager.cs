@@ -113,7 +113,6 @@ public class GestureManager : MonoBehaviour
 
             if (gestureTime <= _swipeProperty.swipeTime && Vector2.Distance(startPoint, endPoint) >= (_swipeProperty.minSwipeDistance * Screen.dpi))
             {
-                Debug.Log("Swipe");
                 FireSwipeEvent();
             }
         }
@@ -184,7 +183,7 @@ public class GestureManager : MonoBehaviour
 
     private void FireDragEvent()
     {
-        /*Debug.Log($"Drag: {trackedFinger.position}");*/
+        Debug.Log($"Drag: {trackedFinger.position}");
         Ray r = Camera.main.ScreenPointToRay(trackedFinger.position);
         RaycastHit hit = new RaycastHit();
         GameObject hitObj = null;

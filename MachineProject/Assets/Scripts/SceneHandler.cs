@@ -6,7 +6,7 @@ public class SceneHandler : MonoBehaviour
 {
     public void onStart()
     {
-        SceneManager.LoadScene("LevelScene");
+        SceneManager.LoadScene("Test");
     }
 
     public void Exit()
@@ -40,6 +40,11 @@ public class SceneHandler : MonoBehaviour
     public void Options()
     {
         SceneManager.LoadScene("OptionScene");
+    }
+    
+    public void LevelSelect()
+    {
+        SceneManager.LoadScene("LevelScene");
     }
 
     public void fromNotif(GameObject panel)
