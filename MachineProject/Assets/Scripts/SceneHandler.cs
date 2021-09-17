@@ -24,11 +24,11 @@ public class SceneHandler : MonoBehaviour
     }
     public void Level2()
     {
-        Debug.Log("Does Not Exist");
+        SceneManager.LoadScene("level2");
     }
     public void Level3()
     {
-        Debug.Log("Does Not Exist");
+        SceneManager.LoadScene("level3");
     }
 
     public void onShop()
