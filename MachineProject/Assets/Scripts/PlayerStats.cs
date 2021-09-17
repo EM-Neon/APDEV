@@ -15,6 +15,8 @@ public class PlayerStats : MonoBehaviour
     public bool isUlting = false;
     public bool canUlt = false;
     public bool levelEnd = false;
+    public bool[] levelUnlocked;
+    public bool unlimitedUlti = false;
     public ButtonManager manager;
 
     private void Awake()
@@ -79,5 +81,19 @@ public class PlayerStats : MonoBehaviour
     public void ResetPoints()
     {
         playerScore = 0;
+    }
+
+    public void setAccess()
+    {
+        for(int i=0; i < levelUnlocked.Length; i++)
+        {
+            levelUnlocked[i] = true;
+        }
+    }
+
+    public void infiniteUlt()
+    {
+        unlimitedUlti = true;
+        ultimateCount = 20;
     }
 }

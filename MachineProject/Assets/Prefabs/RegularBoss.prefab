@@ -1006,6 +1006,7 @@ GameObject:
   - component: {fileID: 3197641147514108753}
   - component: {fileID: 8827162446423515435}
   - component: {fileID: 9049625081876795288}
+  - component: {fileID: 8321107827097728741}
   m_Layer: 3
   m_Name: RegularBoss
   m_TagString: Regular
@@ -1066,8 +1067,24 @@ MonoBehaviour:
   maxGrowth: {x: 2, y: 2, z: 2}
   playerStats: {fileID: 0}
   animator: {fileID: 8827162446423515435}
+  panel: {fileID: 0}
+  score: {fileID: 0}
+  money: {fileID: 0}
   particle: {fileID: 1095570533436735727, guid: b0654b44195e3a148a34d675881b64ed, type: 3}
-  health: 100
+  health: 300
+--- !u!65 &8321107827097728741
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2822522223769706987}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.5, z: 0.5}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &3023558743282687740
 GameObject:
   m_ObjectHideFlags: 0

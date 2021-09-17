@@ -21,7 +21,6 @@ public class SceneHandler : MonoBehaviour
     public void Level1()
     {
         SceneManager.LoadScene("level1");
-        Debug.Log("Does Not Exist");
     }
     public void Level2()
     {

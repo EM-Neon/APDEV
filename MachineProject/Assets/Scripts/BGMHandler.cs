@@ -32,7 +32,8 @@ public class BGMHandler : MonoBehaviour
         {
             bgm.clip = main;
             bgm.volume = 0.5f;
-
+            if (!bgm.isPlaying)
+                bgm.Play();
         }
 /*        else if (SceneManager.GetSceneByName("Test").isLoaded)
         {
@@ -43,12 +44,14 @@ public class BGMHandler : MonoBehaviour
         {
             bgm.clip = shop;
             bgm.volume = 0.1f;
+            if (!bgm.isPlaying)
+                bgm.Play();
         }
-        else if (SceneManager.GetSceneByName("LevelScene").isLoaded)
+
+        else if(SceneManager.GetSceneByName("LevelScene").isLoaded)
         {
             bgm.Pause();
         }
-        if (!bgm.isPlaying)
-            bgm.Play();
+
     }
 }

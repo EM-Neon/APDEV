@@ -176,7 +176,8 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
                 beamParticle.startColor = Color.white;
                 beamParticle.gravityModifier = 0;
                 playerStats.ultimateCount -= 0.04f;
-                if(time >= 10.0f)
+                // checks if cheats is enabled
+                if(time >= 10.0f && playerStats.unlimitedUlti == false)
                 {
                     isUlt = false;
                     playerStats.canUlt = false;

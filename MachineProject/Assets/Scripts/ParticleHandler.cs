@@ -7,20 +7,23 @@ public class ParticleHandler : MonoBehaviour
     [SerializeField] private EnemyHandler enemyStats;
     [SerializeField] private PlayerStats playerStats;
     public List<Slider> slider;
+    public Text scoreText;
     private bool ultReady = false;
-    private int damage = 5;
+    private float damage = 0.25f;
     // Start is called before the first frame update
     void Start()
     {
         playerStats = GameObject.Find("PlayerStats").GetComponent<PlayerStats>();
 
-        slider[0].value = 0;
-        slider[1].value = 100;
+        slider[0].value = playerStats.ultimateCount;
+        slider[1].value = 300;
+        slider[1].gameObject.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
+        scoreText.text = "Score: " + playerStats.playerScore.ToString();
         if(slider[0].value >= 20)
         {
             playerStats.canUlt = true;
@@ -51,10 +54,11 @@ public class ParticleHandler : MonoBehaviour
         }
         else
         {
-            damage = 2;
+            damage = 0.25f;
         }
         if (other.layer == 3)//layer is boss
         {
+            /*slider[1].gameObject.SetActive(true);*/
             if (this.gameObject.tag == other.tag)
             {
                 enemyStats.health -= damage;
