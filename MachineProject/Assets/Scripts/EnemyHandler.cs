@@ -87,6 +87,7 @@ public class EnemyHandler : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         Destroy(this.gameObject);
+        panel.SetActive(true);
         Time.timeScale = 0;
         score.text = "Score: " + playerStats.playerScore;
         money.text = "Besos: " + playerStats.moneyAmount;
