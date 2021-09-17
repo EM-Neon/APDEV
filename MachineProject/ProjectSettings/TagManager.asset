@@ -10,6 +10,7 @@ TagManager:
   - Gas
   - Regular
   - Electric
+  - Clear
   layers:
   - Default
   - TransparentFX

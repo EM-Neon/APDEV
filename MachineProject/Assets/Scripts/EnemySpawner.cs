@@ -16,14 +16,19 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(this.gameObject.layer == 3)
+        if(other.tag == "MainCamera")
         {
-            slider.value = 500;
-            slider.gameObject.SetActive(true);
+            if(this.gameObject.layer == 3)
+            {
+                slider.value = 300;
+                slider.gameObject.SetActive(true);
+            }
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if(enemies[i] != null)
+                    enemies[i].SetActive(true);
+            }
         }
-        for (int i = 0; i < enemies.Count; i++)
-        {
-            enemies[i].SetActive(true);
-        }
+        
     }
 }

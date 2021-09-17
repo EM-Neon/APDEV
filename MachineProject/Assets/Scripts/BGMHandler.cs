@@ -10,6 +10,8 @@ public class BGMHandler : MonoBehaviour
     public AudioClip main;
 /*    public AudioClip level1;*/
     public AudioClip shop;
+    public AudioClip spawnSFX;
+    public AudioClip throwSFX;
     [SerializeField] private AudioSource bgm;
 
     private void Awake()
@@ -53,5 +55,17 @@ public class BGMHandler : MonoBehaviour
             bgm.Pause();
         }
 
+    }
+
+    public void onSpawn()
+    {
+        bgm.clip = spawnSFX;
+        bgm.Play();
+    }
+
+    public void onThrow()
+    {
+        bgm.clip = throwSFX;
+        bgm.Play();
     }
 }
