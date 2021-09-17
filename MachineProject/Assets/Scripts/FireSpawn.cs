@@ -31,4 +31,9 @@ public class FireSpawn : MonoBehaviour
             GameObject.Instantiate(spawnObject, collisionEvents[i].intersection, Quaternion.identity);
         }
     }
+
+    private void FixedUpdate()
+    {
+
+    }
 }
