@@ -56,7 +56,8 @@ public class EnemyHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        this.gameObject.SetActive(false);
+        if(other.tag == "Clear")
+            this.gameObject.SetActive(false);
     }
 
     private void onBoss()

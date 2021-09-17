@@ -91,9 +91,28 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public void resetAccess()
+    {
+        levelUnlocked[1] = false;
+        levelUnlocked[2] = false;
+    }
+
+    public void instaCash()
+    {
+        moneyAmount += 100;
+    }
+
     public void infiniteUlt()
     {
-        unlimitedUlti = true;
-        ultimateCount = 20;
+        if (!unlimitedUlti)
+        {
+            unlimitedUlti = true;
+            ultimateCount = 20;
+        }
+        else
+        {
+            unlimitedUlti = false;
+            ultimateCount = 0;
+        }
     }
 }

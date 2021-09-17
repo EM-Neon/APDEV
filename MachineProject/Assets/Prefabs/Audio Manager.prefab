@@ -58,6 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   main: {fileID: 8300000, guid: 1723e86fdf45ab94088045380258aa20, type: 3}
+  level1: {fileID: 8300000, guid: 35ebe0058128c354e9a31fcb0c2cb346, type: 3}
   shop: {fileID: 8300000, guid: 1dd9bf1c59d62244686efc4d2ce643fb, type: 3}
   spawnSFX: {fileID: 8300000, guid: 6e4f0770446d1f04c9731e0b9f262820, type: 3}
   throwSFX: {fileID: 8300000, guid: b5ab8623ee95eb4468fe0719568c003f, type: 3}
