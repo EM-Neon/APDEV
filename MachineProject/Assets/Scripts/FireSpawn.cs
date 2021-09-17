@@ -28,7 +28,8 @@ public class FireSpawn : MonoBehaviour
 
         for(int i = 0; i < eventCount; i++)
         {
-            GameObject.Instantiate(spawnObject, collisionEvents[i].intersection, Quaternion.identity);
+            GameObject spawn = GameObject.Instantiate(spawnObject, collisionEvents[i].intersection, Quaternion.identity);
+            spawn.transform.localScale = new Vector3(1, 1, 1);
         }
     }
 
