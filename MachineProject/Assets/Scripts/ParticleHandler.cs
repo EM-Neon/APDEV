@@ -17,7 +17,7 @@ public class ParticleHandler : MonoBehaviour
 
         slider[0].value = playerStats.ultimateCount;
         slider[1].value = 300;
-        slider[1].gameObject.SetActive(true);
+        /*slider[1].gameObject.SetActive(true);*/
     }
 
     // Update is called once per frame

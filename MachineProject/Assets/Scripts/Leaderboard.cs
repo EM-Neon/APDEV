@@ -72,8 +72,6 @@ public class Leaderboard : MonoBehaviour
         }
     }
 
-
-
     public void CreatePlayer()
     {
         StartCoroutine(SamplePostRoutine());

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Cheats : MonoBehaviour
 {
     [SerializeField] PlayerStats playerStats;
+    private bool cheat1Enabled = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,10 +14,18 @@ public class Cheats : MonoBehaviour
 
     public void onCheatEnabled()
     {
-        playerStats.infiniteUlt();
+        if(cheat1Enabled)
+            playerStats.infiniteUlt();
+        else
+            playerStats.infiniteUlt();
     }
     public void levelSelect()
     {
         playerStats.setAccess();
+    }
+
+    public void onCheat2()
+    {
+        playerStats.instaCash();
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Animations;
+using UnityEngine.Audio;
 
 public class EnemyHandler : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class EnemyHandler : MonoBehaviour
     public Vector3 maxGrowth = new Vector3(1.5f, 1.5f, 1.5f);
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private Animator animator;
+    [SerializeField] private BGMHandler bossAudio;
     public GameObject panel;
     public Text score;
     public Text money;
@@ -23,6 +25,8 @@ public class EnemyHandler : MonoBehaviour
         playerStats = GameObject.Find("PlayerStats").GetComponent<PlayerStats>();
         if(this.gameObject.layer == 3)
         {
+            bossAudio = GameObject.Find("Audio Manager").GetComponent<BGMHandler>();
+            bossAudio.onSpawn();
             animator.SetTrigger("Dance");
         }
     }
@@ -52,7 +56,8 @@ public class EnemyHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        this.gameObject.SetActive(false);
+        if(other.tag == "Clear")
+            this.gameObject.SetActive(false);
     }
 
     private void onBoss()
@@ -63,6 +68,7 @@ public class EnemyHandler : MonoBehaviour
             timer = 0;
             Vector3 position = new Vector3(0, 1, 0);
             animator.SetTrigger("Throw");
+            bossAudio.onThrow();
             GameObject explodeParticle = GameObject.Instantiate(particle.gameObject, this.transform.position + position, Quaternion.Euler(-90, 0, 0));
             explodeParticle.GetComponent<ParticleSystem>().Play();
         }
