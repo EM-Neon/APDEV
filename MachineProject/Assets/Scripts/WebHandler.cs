@@ -29,7 +29,7 @@ public class WebHandler : MonoBehaviour
     [SerializeField] private InputField[] text;
     [SerializeField] private InputField[] edit;
     [SerializeField] private Dropdown down;
-    private List<string> options;
+
     private List<Profile> profiles = new List<Profile>();
     public string BaseURL
     {
@@ -88,8 +88,9 @@ public class WebHandler : MonoBehaviour
                 Debug.Log($"Got player: {player["nickname"]}");
                 Profile profile = new Profile(player["nickname"], player["name"], player["email"], player["contact"], player["id"]);
                 profiles.Add(profile);
-                options.Add(player["nickname"]);
-                down.AddOptions(options);
+                Dropdown.OptionData newOptions = new Dropdown.OptionData();
+                newOptions.text = player["nickname"];
+                down.options.Add(newOptions);
 
             }
         }
@@ -133,7 +134,7 @@ public class WebHandler : MonoBehaviour
 
         byte[] requestData = new UTF8Encoding().GetBytes(requestString);
 
-        UnityWebRequest request = new UnityWebRequest(BaseURL + "players", "PUT");
+        UnityWebRequest request = new UnityWebRequest(BaseURL + "players/" + profiles[down.value].id, "PUT");
 
         request.SetRequestHeader("Content-Type", "application/json");
         request.uploadHandler = new UploadHandlerRaw(requestData);
@@ -158,7 +159,7 @@ public class WebHandler : MonoBehaviour
 
     IEnumerator SampleDeletePlayerRoutine()
     {
-        UnityWebRequest request = new UnityWebRequest(BaseURL + "players", "DELETE");
+        UnityWebRequest request = new UnityWebRequest(BaseURL + "players/" + profiles[down.value-1].id, "DELETE");
 
         request.downloadHandler = new DownloadHandlerBuffer();
 
@@ -194,10 +195,16 @@ public class WebHandler : MonoBehaviour
     public void EditPlayer()
     {
         StartCoroutine(SampleEditPlayerRoutine());
+        down.ClearOptions();
+        for(int i = 0; i < edit.Length; i++)
+        {
+            edit[i].text = "";
+        }
     }
 
     public void DeletePlayer()
     {
         StartCoroutine(SampleDeletePlayerRoutine());
+        down.ClearOptions();
     }
 }

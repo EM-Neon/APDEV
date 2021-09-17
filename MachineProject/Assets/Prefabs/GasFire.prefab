@@ -9975,5 +9975,6 @@ MonoBehaviour:
   growthRate: {x: 0.001, y: 0.001, z: 0.001}
   maxGrowth: {x: 2, y: 2, z: 2}
   playerStats: {fileID: 0}
+  animator: {fileID: 0}
   particle: {fileID: 2506583245844409276, guid: 4d05ed55084343f428162a9e1a01e516, type: 3}
   health: 100

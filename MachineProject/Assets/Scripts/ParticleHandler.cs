@@ -14,7 +14,7 @@ public class ParticleHandler : MonoBehaviour
     {
         playerStats = GameObject.Find("PlayerStats").GetComponent<PlayerStats>();
 
-        slider[0].value = 20;
+        slider[0].value = 0;
         slider[1].value = 100;
     }
 
@@ -51,7 +51,7 @@ public class ParticleHandler : MonoBehaviour
         }
         else
         {
-            damage = 5;
+            damage = 2;
         }
         if (other.layer == 3)//layer is boss
         {
@@ -67,11 +67,11 @@ public class ParticleHandler : MonoBehaviour
                 }
             }
             if (enemyStats.health <= 0)
-                {
-                    playerStats.playerScore += 15;
-                    playerStats.moneyAmount += 50;
-                    Destroy(other);
-                }
+            {
+                playerStats.playerScore += 15;
+                playerStats.moneyAmount += 50;
+                enemyStats.onDeath();
+            }
             slider[1].value = enemyStats.health;
         }
         else if (this.gameObject.tag == other.tag)

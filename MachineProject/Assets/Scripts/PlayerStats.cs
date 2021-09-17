@@ -11,9 +11,10 @@ public class PlayerStats : MonoBehaviour
     public float[] holdStatPrice = new float[3];
     public float[] holdLevel = new float[3];
     public int playerScore = 0;
-    public float ultimateCount = 20;
+    public float ultimateCount = 0;
     public bool isUlting = false;
     public bool canUlt = false;
+    public bool levelEnd = false;
     public ButtonManager manager;
 
     private void Awake()

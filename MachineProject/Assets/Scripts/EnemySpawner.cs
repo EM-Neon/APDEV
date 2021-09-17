@@ -6,17 +6,18 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private List<GameObject> enemies;
 
-    public int totalEnemies = 100;
-    private int currentFires = 0;
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        for (int i = 0; i < enemies.Count; i++){
+            enemies[i].SetActive(false);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            enemies[i].SetActive(true);
+        }
     }
 }
