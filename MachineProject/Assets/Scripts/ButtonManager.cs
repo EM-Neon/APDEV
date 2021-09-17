@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class ButtonManager : MonoBehaviour
     {
         playerStats = GameObject.Find("PlayerStats").GetComponent<PlayerStats>();
 
+        
         for (int i = 0; i < buyButtons.Length; i++)
         {
             Debug.Log(i);

@@ -11447,6 +11447,9 @@ MonoBehaviour:
   ultimateCount: 20
   isUlting: 0
   canUlt: 0
+  levelEnd: 0
+  levelUnlocked: 010000
+  unlimitedUlti: 0
   manager: {fileID: 0}
 --- !u!4 &1990884554
 Transform:

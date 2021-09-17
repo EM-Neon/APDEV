@@ -10,9 +10,13 @@ public class EnemyHandler : MonoBehaviour
     public Vector3 maxGrowth = new Vector3(1.5f, 1.5f, 1.5f);
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private Animator animator;
+    public GameObject panel;
+    public Text score;
+    public Text money;
     public ParticleSystem particle;
-    public int health = 100;
+    public float health = 300;
     private float timer = 0;
+    private float deathTimer = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -76,5 +80,24 @@ public class EnemyHandler : MonoBehaviour
     public void onDeath()
     {
         animator.SetTrigger("Dead");
+        StartCoroutine(bossDeath());
+    }
+
+    IEnumerator bossDeath()
+    {
+        yield return new WaitForSeconds(5);
+        Destroy(this.gameObject);
+        Time.timeScale = 0;
+        score.text = "Score: " + playerStats.playerScore;
+        money.text = "Besos: " + playerStats.moneyAmount;
+        // checks if all the current level is unlocked as it unlocks the next level for selection
+        if (playerStats.levelUnlocked[0])
+        {
+            playerStats.levelUnlocked[1] = true;
+        }
+        else if (playerStats.levelUnlocked[1])
+        {
+            playerStats.levelUnlocked[2] = true;
+        }
     }
 }

@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class LifeCycle : MonoBehaviour
 {
     public GameObject pauseObject;
-
     public void Pause()
     {
         Time.timeScale = 0;
