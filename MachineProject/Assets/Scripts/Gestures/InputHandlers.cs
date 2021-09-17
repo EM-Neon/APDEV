@@ -7,19 +7,23 @@ using UnityEngine.Audio;
 public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotated
 {
     [SerializeField] private PlayerStats playerStats;
-    [SerializeField] private GameObject image;
+    /*[SerializeField] private GameObject image;*/
     [SerializeField] private Material[] typeColor = new Material[3];
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private AudioSource spraySFX;
 
+    public Slider slider;
     private List<Color> change = new List<Color>();
+    public List<Image> image;
     private Color holder;
     public float resizeSpeed = 5;
     public float rotateSpeed = 1;
     public float maxDistance = 1000;
+    private string tagHolder;
 
     public float time = 0.0f;
     public bool isUlt = false;
+    private bool hasTriggered = false;
     private Vector3 TargetPos = Vector3.zero;
     private Vector3 direction;
     ParticleSystem.MainModule beamParticle;
@@ -36,10 +40,14 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
         change.Add(Color.red);  //0
         change.Add(Color.yellow); //1
         change.Add(Color.blue); //2
+        change.Add(Color.white);
         beamParticle.startColor = change[2];
         particle.tag = "Regular";
-        holder = image.GetComponent<Image>().color;
+        tagHolder = particle.tag;
+        holder = image[0].GetComponent<Image>().color;
         particle.Stop();
+        slider.maxValue = 20;
+        slider.value = 20;
     }
 
     private void FixedUpdate()
@@ -50,7 +58,8 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
         {
             if (particle.isPlaying)
             {
-                particle.Stop();
+                particle.Pause();
+                particle.gameObject.SetActive(false);
             }                
             onReload();
         }
@@ -58,8 +67,16 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
         if(xValue >= 2.0f && playerStats.canUlt)
         {
             isUlt = true;
+            if (!hasTriggered)
+            {
+                tagHolder = particle.tag;
+                holder = image[0].GetComponent<Image>().color;
+                hasTriggered = true;
+                playerStats.isUlting = true;
+            }
+            image[0].color = change[3];
+            image[1].color = change[3];
         }
-        
     }
 
     public void OnSwipe(object sender, SwipeEventArgs args)
@@ -70,47 +87,42 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
             // if it is the same, the color changes to the next color available
             if (holder == change[0])
             {
-                image.GetComponent<Image>().color = change[1];
+                holder = change[1];
                 particle.tag = "Gas";
             }
             else if (holder == change[1])
             {
-                image.GetComponent<Image>().color = change[2];
+                holder = change[2];
                 particle.tag = "Regular";
             }
             else if (holder == change[2])
             {
-                image.GetComponent<Image>().color = change[0];
+                holder = change[0];
                 particle.tag = "Electric";
             }
-            holder = image.GetComponent<Image>().color;
         }
         else if (args.SwipeDirection == SwipeDirections.DOWN)
         {
             if (holder == change[0])
             {
-                image.GetComponent<Image>().color = change[2];
+                holder = change[2];
                 particle.tag = "Regular";
             }
             else if (holder == change[1])
             {
-                image.GetComponent<Image>().color = change[0];
+                holder = change[0];
                 particle.tag = "Electric";
             }
             else if (holder == change[2])
             {
-                image.GetComponent<Image>().color = change[1];
+                holder = change[1];
                 particle.tag = "Gas";
             }
-            holder = image.GetComponent<Image>().color;
         }
-
-        for (int i = 0; i < change.Count; i++)
+        beamParticle.startColor = holder;
+        for(int i = 0; i < image.Count; i++)
         {
-            if (holder == change[i])
-            {
-                beamParticle.startColor = change[i];
-            }
+            image[i].GetComponent<Image>().color = holder;
         }
     }
 
@@ -134,9 +146,10 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
             Aim(gameObject, pos);
         }
 
-        if (particle.isStopped)
+        if (particle.isStopped || particle.isPaused)
         {
             particle.Play();
+            particle.gameObject.SetActive(true);
             spraySFX.Play();
         }
         if (particle.isPlaying)
@@ -147,24 +160,34 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
                 if(beamParticle.startSpeedMultiplier > minPressure)
                 {
                     beamParticle.startSpeedMultiplier -= minSpeed;
+                    slider.value -= minSpeed;
                 }
                 if( beamParticle.startSpeedMultiplier <= minPressure)
                 {
                     beamParticle.startSpeedMultiplier = minPressure;
+                    slider.value = minPressure;
                 }
             }
             else
             {
                 time += Time.fixedDeltaTime;
                 beamParticle.startSpeedMultiplier = 100;
+                slider.value = 20;
                 beamParticle.startColor = Color.white;
                 beamParticle.gravityModifier = 0;
+                playerStats.ultimateCount -= 0.04f;
                 if(time >= 10.0f)
                 {
                     isUlt = false;
+                    playerStats.canUlt = false;
+                    playerStats.isUlting = false;
+                    hasTriggered = false;
                     beamParticle.startSpeedMultiplier = 20;
+                    particle.tag = tagHolder;
                     beamParticle.gravityModifier = 1;
                     beamParticle.startColor = holder;
+                    image[0].color = holder;
+                    image[1].color = holder;
                     time = 0;
                 }
             }
@@ -180,10 +203,12 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
         if (beamParticle.startSpeedMultiplier < 20)
         {
             beamParticle.startSpeedMultiplier += rechargeTime;
+            slider.value += rechargeTime;
         }
         if(beamParticle.startSpeedMultiplier >= 20)
         {
             beamParticle.startSpeedMultiplier = 20;
+            slider.value = 20;
         }
     }
 

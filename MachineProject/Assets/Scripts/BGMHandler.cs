@@ -8,7 +8,7 @@ public class BGMHandler : MonoBehaviour
 {
     private static GameObject audioInstance;
     public AudioClip main;
-    public AudioClip level1;
+/*    public AudioClip level1;*/
     public AudioClip shop;
     [SerializeField] private AudioSource bgm;
 
@@ -34,11 +34,11 @@ public class BGMHandler : MonoBehaviour
             bgm.volume = 0.5f;
 
         }
-        else if (SceneManager.GetSceneByName("Test").isLoaded)
+/*        else if (SceneManager.GetSceneByName("Test").isLoaded)
         {
             bgm.clip = level1;
             bgm.volume = 0.1f;
-        }
+        }*/
         else if (SceneManager.GetSceneByName("ShopScene").isLoaded)
         {
             bgm.clip = shop;
