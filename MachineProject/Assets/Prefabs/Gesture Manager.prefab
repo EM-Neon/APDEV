@@ -47,10 +47,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _swipeProperty:
-    minSwipeDistance: 2
-    swipeTime: 0.5
+    minSwipeDistance: 0.5
+    swipeTime: 0.25
   _dragProperty:
-    bufferTime: 0.8
+    bufferTime: 0.15
   _twoFingerPanProperty:
     maxDistance: 0.4
   _spreadProperty:

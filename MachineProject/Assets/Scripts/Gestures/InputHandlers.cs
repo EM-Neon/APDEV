@@ -10,6 +10,7 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
     /*[SerializeField] private GameObject image;*/
     [SerializeField] private Material[] typeColor = new Material[3];
     [SerializeField] private ParticleSystem particle;
+    private ParticleSystem.EmissionModule em;
     [SerializeField] private AudioSource spraySFX;
 
     public Slider slider;
@@ -45,22 +46,19 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
         particle.tag = "Regular";
         tagHolder = particle.tag;
         holder = image[0].GetComponent<Image>().color;
-        particle.Stop();
         slider.maxValue = 20;
         slider.value = 20;
+        particle.Play();
+        em = particle.emission;
+        checkUpgrades();
     }
 
     private void FixedUpdate()
     {
         float xValue = Input.acceleration.magnitude;
-        checkUpgrades();
         if (!GestureManager.Instance.isDrag)
         {
-            if (particle.isPlaying)
-            {
-                particle.Pause();
-                particle.gameObject.SetActive(false);
-            }                
+            em.enabled = false;
             onReload();
         }
         // checks accelerometer to see if ultimate is being activated
@@ -138,7 +136,9 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
         
         if (Physics.Raycast(r.origin, r.direction, out hit, Mathf.Infinity))
         {
-            Aim(gameObject, hit.point);
+            //Aim(gameObject, hit.point);
+            Vector3 pos = r.GetPoint(maxDistance);
+            Aim(gameObject, pos);
         }
         else
         {
@@ -146,13 +146,15 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
             Aim(gameObject, pos);
         }
 
-        if (particle.isStopped || particle.isPaused)
+
+
+        if (em.enabled == false)
         {
-            particle.Play();
-            particle.gameObject.SetActive(true);
+            em.enabled = true;
             spraySFX.Play();
         }
-        if (particle.isPlaying)
+
+        if (em.enabled == true)
         {
             //checks if player does not have ult activated
             if (!isUlt)
@@ -225,11 +227,11 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
         //pressure decrease upgrades
         switch (playerStats.holdLevel[0])
         {
-            case 2: minSpeed = 0.04f; break;
-            case 3: minSpeed = 0.03f; break;
-            case 4: minSpeed = 0.02f; break;
-            case 5: minSpeed = 0.01f; break;
-            default: minSpeed = 0.05f; break;
+            case 2: minSpeed = 0.009f; break;
+            case 3: minSpeed = 0.008f; break;
+            case 4: minSpeed = 0.007f; break;
+            case 5: minSpeed = 0.006f; break;
+            default: minSpeed = 0.01f; break;
         }
         // minimum pressure
         switch (playerStats.holdLevel[1])
