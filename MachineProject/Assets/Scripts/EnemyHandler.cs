@@ -7,7 +7,7 @@ using UnityEngine.Audio;
 
 public class EnemyHandler : MonoBehaviour
 {
-    public Vector3 growthRate = new Vector3(0.001f, 0.001f, 0.001f);
+    public Vector3 growthRate = new Vector3(0.002f, 0.002f, 0.002f);
     public Vector3 maxGrowth = new Vector3(1.5f, 1.5f, 1.5f);
     public PlayerStats playerStats;
     public Animator animator;
@@ -57,6 +57,8 @@ public class EnemyHandler : MonoBehaviour
     {
         if(other.tag == "Clear")
             this.gameObject.SetActive(false);
+
+        playerStats.playerScore -= 30;
     }
 
     private void onBoss()
@@ -75,7 +77,7 @@ public class EnemyHandler : MonoBehaviour
 
     private void Explode()
     {
-        playerStats.playerScore -= 10;
+        playerStats.playerScore -= 30;
         Vector3 position = new Vector3(0, 1, 0);
         GameObject explodeParticle = GameObject.Instantiate(particle.gameObject, this.transform.position + position, Quaternion.Euler(-90,0,0));
         explodeParticle.GetComponent<ParticleSystem>().Play();
@@ -105,6 +107,9 @@ public class EnemyHandler : MonoBehaviour
         {
             playerStats.levelUnlocked[2] = true;
         }
-        
+        if(playerStats.playerScore < 2000)
+        {
+            Debug.Log("GameOver: Cesar put something here");
+        }
     }
 }
