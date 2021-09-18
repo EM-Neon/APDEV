@@ -6,7 +6,7 @@ using System;
 using UnityEngine.Advertisements;
 public class AdsManager : MonoBehaviour, IUnityAdsListener
 {
-
+    public Offline offline;
     public EventHandler<AdFinishEventArgs> OnAdDone;
     public string GameID
     {
@@ -29,10 +29,15 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     private void Awake()
     {
         Advertisement.Initialize(GameID, true);
+        
     }
         
     public void ShowInterstitialAd()
     {
+        if (!offline.hasInternet)
+        {
+            return;
+        }
         if (Advertisement.IsReady(SampleInterstitialAd))
         {
             Advertisement.Show(SampleInterstitialAd);
@@ -56,6 +61,10 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
 
     public void ShowBannerAd()
     {
+        if (!offline.hasInternet)
+        {
+            return;
+        }
         StartCoroutine(ShowBannerAd_Routine());
     }
 
@@ -86,6 +95,10 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
 
     public void ShowRewardedAd()
     {
+        if (!offline.hasInternet)
+        {
+            return;
+        }
         if (Advertisement.IsReady(SampleRewardedAd))
         {
             Advertisement.Show(SampleRewardedAd);
