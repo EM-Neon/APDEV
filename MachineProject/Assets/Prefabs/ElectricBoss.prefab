@@ -1257,7 +1257,7 @@ GameObject:
   - component: {fileID: 6039357102696104386}
   m_Layer: 3
   m_Name: ElectricBoss
-  m_TagString: Regular
+  m_TagString: Electric
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
