@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Animations;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class EnemyHandler : MonoBehaviour
 {
@@ -86,6 +87,7 @@ public class EnemyHandler : MonoBehaviour
 
     public void onDeath()
     {
+        this.GetComponent<BoxCollider>().enabled = false;
         animator.SetTrigger("Dead");
         StartCoroutine(bossDeath());
     }
@@ -107,7 +109,11 @@ public class EnemyHandler : MonoBehaviour
         {
             playerStats.levelUnlocked[2] = true;
         }
-        if(playerStats.playerScore < 2000)
+        if (playerStats.levelUnlocked[2])
+        {
+            SceneManager.LoadScene("GameOverScene");
+        }
+        if (playerStats.playerScore < 1500)
         {
             Debug.Log("GameOver: Cesar put something here");
         }

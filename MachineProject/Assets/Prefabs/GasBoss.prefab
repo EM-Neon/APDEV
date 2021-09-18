@@ -1108,8 +1108,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5004610351342522139}
-  m_LocalRotation: {x: -0, y: -0.9238794, z: -0, w: 0.38268375}
-  m_LocalPosition: {x: 3, y: 0, z: -13.5}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5335297144845904975}
@@ -1118,7 +1118,7 @@ Transform:
   - {fileID: 4708522218020193794}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -135, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1790197212631666651
 Animator:
   serializedVersion: 3
@@ -1156,9 +1156,7 @@ MonoBehaviour:
   animator: {fileID: 1790197212631666651}
   bossAudio: {fileID: 0}
   panel: {fileID: 0}
-  leaderBoard: {fileID: 0}
   score: {fileID: 0}
-  leaderBoardScore: {fileID: 0}
   money: {fileID: 0}
   particle: {fileID: 2506583245844409276, guid: 4d05ed55084343f428162a9e1a01e516, type: 3}
   health: 300
@@ -1173,8 +1171,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 1.5, z: 0.5}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: 0.65, y: 1.8, z: 0.3}
+  m_Center: {x: 0, y: 0.88, z: 0}
 --- !u!54 &3385786340540116781
 Rigidbody:
   m_ObjectHideFlags: 0
