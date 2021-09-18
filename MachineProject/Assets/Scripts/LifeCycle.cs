@@ -13,6 +13,7 @@ public class LifeCycle : MonoBehaviour
 
     public void Resume()
     {
+        Debug.Log("Resume");
         Time.timeScale = 1;
         pauseObject.SetActive(false);
     }

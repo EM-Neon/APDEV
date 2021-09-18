@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class Leaderboard : MonoBehaviour
 {
     public Text text;
+    public InputField user_name;
     public string BaseURL
     {
         get { return "https://my-user-scoreboard.herokuapp.com/api/"; }
@@ -19,8 +20,8 @@ public class Leaderboard : MonoBehaviour
         Dictionary<string, string> PlayerParams = new Dictionary<string, string>();
 
         PlayerParams.Add("group_num", "6");
-        PlayerParams.Add("user_name", "Ian");
-        PlayerParams.Add("score",  "1000");
+        PlayerParams.Add("user_name", user_name.text);
+        PlayerParams.Add("score",  text.text);
 
         string requestString = JsonConvert.SerializeObject(PlayerParams);
         byte[] requestData = new UTF8Encoding().GetBytes(requestString);

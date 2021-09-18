@@ -6,7 +6,7 @@ public class SceneHandler : MonoBehaviour
 {
     public void onStart()
     {
-        SceneManager.LoadScene("Test");
+        SceneManager.LoadScene("level1");
     }
 
     public void Exit()

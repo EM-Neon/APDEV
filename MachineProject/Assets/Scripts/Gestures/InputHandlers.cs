@@ -7,11 +7,10 @@ using UnityEngine.Audio;
 public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotated
 {
     [SerializeField] private PlayerStats playerStats;
-    /*[SerializeField] private GameObject image;*/
     [SerializeField] private Material[] typeColor = new Material[3];
     [SerializeField] private ParticleSystem particle;
     private ParticleSystem.EmissionModule em;
-    [SerializeField] private AudioSource spraySFX;
+    public AudioSource spraySFX;
 
     public Slider slider;
     private List<Color> change = new List<Color>();
@@ -215,6 +214,10 @@ public class InputHandlers : MonoBehaviour, ISwipped, IDragged, ISpread, IRotate
         }
     }
 
+    public void onSubmit()
+    {
+        playerStats.ResetPoints();
+    }
     private void Aim(GameObject obj, Vector3 destination)
     {
         direction = destination - obj.transform.position;

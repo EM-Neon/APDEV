@@ -9,11 +9,13 @@ public class EnemyHandler : MonoBehaviour
 {
     public Vector3 growthRate = new Vector3(0.001f, 0.001f, 0.001f);
     public Vector3 maxGrowth = new Vector3(1.5f, 1.5f, 1.5f);
-    [SerializeField] private PlayerStats playerStats;
-    [SerializeField] private Animator animator;
-    [SerializeField] private BGMHandler bossAudio;
+    public PlayerStats playerStats;
+    public Animator animator;
+    public AnimationSFX bossAudio;
     public GameObject panel;
+    public GameObject leaderBoard;
     public Text score;
+    public Text leaderBoardScore;
     public Text money;
     public ParticleSystem particle;
     public float health = 300;
@@ -25,7 +27,6 @@ public class EnemyHandler : MonoBehaviour
         playerStats = GameObject.Find("PlayerStats").GetComponent<PlayerStats>();
         if(this.gameObject.layer == 3)
         {
-            bossAudio = GameObject.Find("Audio Manager").GetComponent<BGMHandler>();
             bossAudio.onSpawn();
             animator.SetTrigger("Dance");
         }
@@ -97,6 +98,13 @@ public class EnemyHandler : MonoBehaviour
         Time.timeScale = 0;
         score.text = "Score: " + playerStats.playerScore;
         money.text = "Besos: " + playerStats.moneyAmount;
+        
+        if (playerStats.levelUnlocked[2])
+        {
+            panel.SetActive(false);
+            leaderBoardScore.text = playerStats.playerScore.ToString();
+            leaderBoard.SetActive(true);
+        }
         // checks if all the current level is unlocked as it unlocks the next level for selection
         if (playerStats.levelUnlocked[0])
         {
@@ -106,5 +114,6 @@ public class EnemyHandler : MonoBehaviour
         {
             playerStats.levelUnlocked[2] = true;
         }
+        
     }
 }

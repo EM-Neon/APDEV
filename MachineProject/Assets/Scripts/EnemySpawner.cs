@@ -18,15 +18,18 @@ public class EnemySpawner : MonoBehaviour
     {
         if(other.tag == "MainCamera")
         {
-            if(this.gameObject.layer == 3)
-            {
-                slider.value = 300;
-                slider.gameObject.SetActive(true);
-            }
             for (int i = 0; i < enemies.Count; i++)
             {
                 if(enemies[i] != null)
+                {
+                    if(enemies[i].gameObject.layer == 3)
+                    {
+                        slider.value = 300;
+                        slider.gameObject.SetActive(true);
+                    }
                     enemies[i].SetActive(true);
+                }
+                    
             }
         }
         

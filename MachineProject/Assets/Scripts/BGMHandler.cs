@@ -10,13 +10,10 @@ public class BGMHandler : MonoBehaviour
     public AudioClip main;
     public AudioClip level1;
     public AudioClip level2;
-    /*public AudioClip level3;*/
+    public AudioClip level3;
     public AudioClip shop;
-    public AudioClip spawnSFX;
-    public AudioClip throwSFX;
-    private bool sfxPlaying = false;
-    private float timer = 0;
-    [SerializeField] private AudioSource bgm;
+    public AudioSource bgm;
+    public bool isStopped = false;
 
     private void Awake()
     {
@@ -34,16 +31,7 @@ public class BGMHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (sfxPlaying)
-        {
-            timer += Time.fixedDeltaTime;
-            if (timer >= 60.0f)
-            {
-                sfxPlaying = false;
-                timer = 0;
-            }
-        }
-        else
+        if (!isStopped)
         {
             if (SceneManager.GetSceneByName("MainMenu").isLoaded)
             {
@@ -56,7 +44,7 @@ public class BGMHandler : MonoBehaviour
             {
                 bgm.clip = level1;
                 bgm.volume = 0.1f;
-                if(!bgm.isPlaying)
+                if (!bgm.isPlaying)
                 {
                     bgm.Play();
                 }
@@ -64,6 +52,15 @@ public class BGMHandler : MonoBehaviour
             else if (SceneManager.GetSceneByName("level2").isLoaded)
             {
                 bgm.clip = level2;
+                bgm.volume = 0.1f;
+                if (!bgm.isPlaying)
+                {
+                    bgm.Play();
+                }
+            }
+            else if (SceneManager.GetSceneByName("level3").isLoaded)
+            {
+                bgm.clip = level3;
                 bgm.volume = 0.1f;
                 if (!bgm.isPlaying)
                 {
@@ -78,29 +75,15 @@ public class BGMHandler : MonoBehaviour
                     bgm.Play();
             }
 
-            else if(SceneManager.GetSceneByName("LevelScene").isLoaded)
+            else if (SceneManager.GetSceneByName("LevelScene").isLoaded)
             {
                 bgm.Pause();
             }
         }
-        
-
-    }
-
-    public void onSpawn()
-    {
-        bgm.Stop();
-        bgm.clip = spawnSFX;
-        sfxPlaying = true;
-        bgm.Play();
-    }
-
-    public void onThrow()
-    {
-        bgm.Pause();
-        bgm.clip = throwSFX;
-        sfxPlaying = true;
-        bgm.Play();
-        
+        else
+        {
+            bgm.Pause();
+        }
+       
     }
 }

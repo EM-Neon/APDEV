@@ -21814,7 +21814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074d85db3b11a454e85691de6768efd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyAmount: 1000
+  moneyAmount: 0
   incrementMultiplier: 1.5
   holdStatPrice:
   - 50
@@ -21825,7 +21825,7 @@ MonoBehaviour:
   - 1
   - 1
   playerScore: 0
-  ultimateCount: 20
+  ultimateCount: 0
   isUlting: 0
   canUlt: 0
   levelEnd: 0
@@ -22217,6 +22217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1975038646}
+  user_name: {fileID: 0}
 --- !u!1 &2088182224
 GameObject:
   m_ObjectHideFlags: 0

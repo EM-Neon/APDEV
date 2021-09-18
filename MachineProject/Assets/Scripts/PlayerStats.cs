@@ -81,6 +81,12 @@ public class PlayerStats : MonoBehaviour
     public void ResetPoints()
     {
         playerScore = 0;
+        moneyAmount = 0;
+        for(int i = 0; i < 3; i++)
+        {
+            holdLevel[i] = 1;
+            holdStatPrice[i] = 50;
+        }
     }
 
     public void setAccess()
@@ -115,4 +121,6 @@ public class PlayerStats : MonoBehaviour
             ultimateCount = 0;
         }
     }
+
+    
 }

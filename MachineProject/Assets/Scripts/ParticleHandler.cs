@@ -16,8 +16,8 @@ public class ParticleHandler : MonoBehaviour
         playerStats = GameObject.Find("PlayerStats").GetComponent<PlayerStats>();
 
         slider[0].value = playerStats.ultimateCount;
-        slider[1].value = 300;
-        /*slider[1].gameObject.SetActive(true);*/
+        /*slider[1].value = 300;
+        slider[1].gameObject.SetActive(true);*/
     }
 
     // Update is called once per frame
@@ -46,9 +46,14 @@ public class ParticleHandler : MonoBehaviour
         if(other.layer == 6 || other.layer == 3)
         {
             enemyStats = other.GetComponent<EnemyHandler>();
+            Debug.Log($"Layer: {other.layer}");
         }
-        
-        if(playerStats.isUlting)
+        if(other.layer == 3)
+        {
+            Debug.Log("Third Layer");
+        }
+
+        if (playerStats.isUlting)
         {
             damage = 100;
         }
@@ -58,7 +63,6 @@ public class ParticleHandler : MonoBehaviour
         }
         if (other.layer == 3)//layer is boss
         {
-            /*slider[1].gameObject.SetActive(true);*/
             if (this.gameObject.tag == other.tag)
             {
                 enemyStats.health -= damage;
@@ -83,7 +87,8 @@ public class ParticleHandler : MonoBehaviour
             Destroy(other);
             playerStats.playerScore += 10;
             playerStats.moneyAmount += 20;
-            slider[0].value += 1;
+            if(slider[0].value <= 20)
+                slider[0].value += 1;
         }
         else if (this.gameObject.tag != other.tag)
         {
