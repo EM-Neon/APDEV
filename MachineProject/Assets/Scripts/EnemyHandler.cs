@@ -106,7 +106,7 @@ public class EnemyHandler : MonoBehaviour
         {
             SceneManager.LoadScene("LevelFailed");
         }
-        else if(playerStats.playerScore < 500 && playerStats.levelUnlocked[0])
+        else if(playerStats.playerScore < 500 && playerStats.levelUnlocked[1] || playerStats.levelUnlocked[2])
         {
             SceneManager.LoadScene("LevelFailed");
         }
