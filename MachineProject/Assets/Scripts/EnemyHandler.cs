@@ -102,7 +102,11 @@ public class EnemyHandler : MonoBehaviour
         money.text = "Besos: " + playerStats.moneyAmount;
         playerStats.totalScore += playerStats.playerScore;
 
-        if (playerStats.playerScore < 250)
+        if (playerStats.playerScore < 250 && playerStats.levelUnlocked[0])
+        {
+            SceneManager.LoadScene("LevelFailed");
+        }
+        else if(playerStats.playerScore < 500 && playerStats.levelUnlocked[0])
         {
             SceneManager.LoadScene("LevelFailed");
         }
