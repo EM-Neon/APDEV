@@ -13,6 +13,7 @@ public class BGMHandler : MonoBehaviour
     public AudioClip level3;
     public AudioClip shop;
     public AudioSource bgm;
+    public AudioClip onEnd;
     public bool isStopped = false;
 
     private void Awake()

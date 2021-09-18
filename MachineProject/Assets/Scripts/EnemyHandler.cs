@@ -13,9 +13,7 @@ public class EnemyHandler : MonoBehaviour
     public Animator animator;
     public AnimationSFX bossAudio;
     public GameObject panel;
-    public GameObject leaderBoard;
     public Text score;
-    public Text leaderBoardScore;
     public Text money;
     public ParticleSystem particle;
     public float health = 300;
@@ -98,13 +96,6 @@ public class EnemyHandler : MonoBehaviour
         Time.timeScale = 0;
         score.text = "Score: " + playerStats.playerScore;
         money.text = "Besos: " + playerStats.moneyAmount;
-        
-        if (playerStats.levelUnlocked[2])
-        {
-            panel.SetActive(false);
-            leaderBoardScore.text = playerStats.playerScore.ToString();
-            leaderBoard.SetActive(true);
-        }
         // checks if all the current level is unlocked as it unlocks the next level for selection
         if (playerStats.levelUnlocked[0])
         {

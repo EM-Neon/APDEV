@@ -10,6 +10,7 @@ public class Leaderboard : MonoBehaviour
 {
     public Text text;
     public InputField user_name;
+    public Offline offlines;
     public string BaseURL
     {
         get { return "https://my-user-scoreboard.herokuapp.com/api/"; }
@@ -75,11 +76,19 @@ public class Leaderboard : MonoBehaviour
 
     public void CreatePlayer()
     {
+        if (!offlines.hasInternet)
+        {
+            return;
+        }
         StartCoroutine(SamplePostRoutine());
     }
 
     public void GetPlayers()
     {
+        if (!offlines.hasInternet)
+        {
+            return;
+        }
         StartCoroutine(SampleGetPlayersRoutine());
     }
 }
