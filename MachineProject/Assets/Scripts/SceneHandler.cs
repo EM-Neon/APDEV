@@ -35,7 +35,6 @@ public class SceneHandler : MonoBehaviour
     {
         SceneManager.LoadScene("ShopScene");
     }
-
     public void Options()
     {
         SceneManager.LoadScene("OptionScene");
