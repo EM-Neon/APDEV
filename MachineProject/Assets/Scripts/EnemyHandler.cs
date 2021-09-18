@@ -101,6 +101,12 @@ public class EnemyHandler : MonoBehaviour
         score.text = "Score: " + playerStats.playerScore;
         money.text = "Besos: " + playerStats.moneyAmount;
         playerStats.totalScore += playerStats.playerScore;
+
+        if (playerStats.playerScore < 250)
+        {
+            SceneManager.LoadScene("LevelFailed");
+        }
+
         playerStats.playerScore = 0;
         // checks if all the current level is unlocked as it unlocks the next level for selection
         if (playerStats.levelUnlocked[0])
@@ -115,10 +121,6 @@ public class EnemyHandler : MonoBehaviour
         {
             playerStats.playerScore = playerStats.totalScore;
             SceneManager.LoadScene("GameOverScene");
-        }
-        if (playerStats.playerScore < 1500)
-        {
-            Debug.Log("GameOver: Cesar put something here");
         }
     }
 }
