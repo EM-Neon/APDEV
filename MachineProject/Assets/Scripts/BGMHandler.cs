@@ -27,6 +27,12 @@ public class BGMHandler : MonoBehaviour
         {
             Object.Destroy(gameObject);
         }
+        main = AssetBundleManager.assetInstance.GetAsset<AudioClip>("bgm", "Fire Crackle");
+        level1 = AssetBundleManager.assetInstance.GetAsset<AudioClip>("bgm", "Level 1");
+        level2 = AssetBundleManager.assetInstance.GetAsset<AudioClip>("bgm", "Level 2");
+        level3 = AssetBundleManager.assetInstance.GetAsset<AudioClip>("bgm", "Level 3");
+        shop = AssetBundleManager.assetInstance.GetAsset<AudioClip>("bgm", "Shop");
+        onEnd = AssetBundleManager.assetInstance.GetAsset<AudioClip>("bgm", "End");
     }
 
     // Update is called once per frame

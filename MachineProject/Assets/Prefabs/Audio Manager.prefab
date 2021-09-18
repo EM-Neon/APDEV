@@ -62,9 +62,9 @@ MonoBehaviour:
   level2: {fileID: 8300000, guid: d09ec5858ff5998489fd66bd203ae29c, type: 3}
   level3: {fileID: 8300000, guid: 5196e9fa378b40f4e994aacd6d38d79f, type: 3}
   shop: {fileID: 8300000, guid: 1dd9bf1c59d62244686efc4d2ce643fb, type: 3}
-  spawnSFX: {fileID: 8300000, guid: 6e4f0770446d1f04c9731e0b9f262820, type: 3}
-  throwSFX: {fileID: 8300000, guid: b5ab8623ee95eb4468fe0719568c003f, type: 3}
   bgm: {fileID: 5418832965434516956}
+  onEnd: {fileID: 8300000, guid: bd24af4962e3e1442b295c18af850ff9, type: 3}
+  isStopped: 0
 --- !u!82 &5418832965434516956
 AudioSource:
   m_ObjectHideFlags: 0
