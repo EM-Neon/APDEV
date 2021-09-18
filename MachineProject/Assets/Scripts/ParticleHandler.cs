@@ -82,7 +82,7 @@ public class ParticleHandler : MonoBehaviour
             }
             slider[1].value = enemyStats.health;
         }
-        else if (this.gameObject.tag == other.tag)
+        else if (this.gameObject.tag == other.tag || (playerStats.isUlting == true && other.layer == 6))
         {
             Destroy(other);
             playerStats.playerScore += 10;
