@@ -17,6 +17,7 @@ public class PlayerStats : MonoBehaviour
     public bool levelEnd = false;
     public bool[] levelUnlocked;
     public bool unlimitedUlti = false;
+    public bool shopUnlocked = false;
     public ButtonManager manager;
 
     private void Awake()
@@ -87,6 +88,12 @@ public class PlayerStats : MonoBehaviour
             holdLevel[i] = 1;
             holdStatPrice[i] = 50;
         }
+    }
+
+    public void resetScore()
+    {
+        playerScore = 0;
+        shopUnlocked = true;
     }
 
     public void setAccess()

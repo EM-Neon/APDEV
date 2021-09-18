@@ -50,6 +50,10 @@ public class SceneHandler : MonoBehaviour
         SceneManager.LoadScene("GameOverScene");
     }
 
+    public void levelFailed()
+    {
+        SceneManager.LoadScene("LevelFailed");
+    }
     public void fromNotif(GameObject panel)
     {
         panel.SetActive(false);

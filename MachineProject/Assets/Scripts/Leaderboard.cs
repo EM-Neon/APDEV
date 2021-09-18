@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 using Newtonsoft.Json;
 using System.Text;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Leaderboard : MonoBehaviour
 {
@@ -15,7 +16,6 @@ public class Leaderboard : MonoBehaviour
     {
         get { return "https://my-user-scoreboard.herokuapp.com/api/"; }
     }
-
     IEnumerator SamplePostRoutine()
     {
         Dictionary<string, string> PlayerParams = new Dictionary<string, string>();
